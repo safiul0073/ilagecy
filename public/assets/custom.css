@@ -1,0 +1,18 @@
+/* custom css */
+.left-sidebar {
+    background: #fff !important;
+}
+
+#sidebarnav {
+    background-color: #fff !important;
+}
+
+#sidebarnav i,
+#sidebarnav a {
+    color: #000;
+    opacity: .7
+}
+
+.sidebar-nav .has-arrow::after {
+    border-color: #000 !important;
+}
