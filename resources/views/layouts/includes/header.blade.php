@@ -19,7 +19,7 @@
                         <!-- Dark Logo icon -->
                         <img src="../../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                         <!-- Light Logo icon -->
-                        <img src="../../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
@@ -27,7 +27,7 @@
                         <!-- dark Logo text -->
                         <img src="../../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                         <!-- Light Logo text -->
-                        <img src="../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        <img src="../../assets/images/logo-text.png" class="light-logo" alt="homepage" />
                     </span>
                 </a>
                 <a class="sidebartoggler d-none d-md-block" href="javascript:void(0)" data-sidebartype="mini-sidebar">

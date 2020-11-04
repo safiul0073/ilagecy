@@ -16,3 +16,11 @@
 .sidebar-nav .has-arrow::after {
     border-color: #000 !important;
 }
+
+.navbar-header {
+    background: #fff !important;
+}
+
+.sidebartoggler.d-none.d-md-block i {
+    color: #000;
+}
