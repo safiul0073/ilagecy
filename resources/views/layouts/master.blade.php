@@ -15,6 +15,7 @@
     <title>Ilegacy</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/niceadmin/" />
     <link rel="stylesheet" type="text/css" href="/assets/extra-libs/c3/c3.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">
     <!-- Custom CSS -->
     <link href="/dist/css/style.min.css" rel="stylesheet">
     <link href="/assets/custom.css" rel="stylesheet">
@@ -59,11 +60,10 @@
     <script src="/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="/dist/js/custom.min.js"></script>
-    <!-- This Page JS -->
-    <!-- Chart JS -->
-    {{-- <script src="/dist/js/pages/chartjs/chartjs.init.js"></script>
-    --}}
-    <script src="/assets/libs/chart.js/dist/Chart.min.js"></script>
+    <script src="/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/dist/js/pages/forms/select2/select2.init.js"></script>
+    <script src="/assets/libs/chart.js/dist/Chart.js"></script>
     @yield('js')
 
 </body>

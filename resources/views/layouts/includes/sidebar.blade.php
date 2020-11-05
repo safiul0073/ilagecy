@@ -13,10 +13,10 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="app-todo.html"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.list') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-clipboard-text"></i>
-                        <span class="hide-menu">Todo</span>
+                        <span class="hide-menu">Product Lists</span>
                     </a>
                 </li>
             </ul>

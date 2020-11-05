@@ -9,6 +9,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'sessions'], function () {
     Route::get('/leads/count-status', [DashboardController::class, 'countStatus']);
-    Route::post('/leads/date-search', [DashboardController::class, 'dateSearch']);
+    Route::post('/leads/filter-search', [DashboardController::class, 'filterSearch']);
+});
 // });
