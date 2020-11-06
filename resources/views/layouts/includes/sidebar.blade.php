@@ -19,6 +19,13 @@
                         <span class="hide-menu">Product Lists</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('leads.list') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-clipboard-text"></i>
+                        <span class="hide-menu">Leads</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
