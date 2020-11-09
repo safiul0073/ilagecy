@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\LeadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,8 +10,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Route::group(['middleware' => 'auth'], function () {
-Route::group(['middleware' => 'sessions'], function () {
     Route::get('/leads/count-status', [DashboardController::class, 'countStatus']);
     Route::post('/leads/filter-search', [DashboardController::class, 'filterSearch']);
-});
+    Route::get('/leads/get', [LeadController::class, 'getLeads'])->name('leads.get');
+
+    Route::get('/leads/changeStatus', [LeadController::class, 'changeStatus'])->name('leads.change.status');
 // });

@@ -1,30 +1,31 @@
 @extends('layouts.master')
 @section('contents')
-    <div class="container">
-        <div class="row">
+    @include('layouts.includes.breadcrumb',['title' => 'Leads'])
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Leads:</h4>
-
-                <table class="table" id="datatable">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Supplier Name</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Note</th>
-                            <th>Order Id</th>
-                            <th>Admin Status </th>
-                            <th>Caller Status </th>
-                            <th>Create At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                        <table class="table" id="datatable">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Supplier Name</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Note</th>
+                                    <th>Order Id</th>
+                                    <th>Action</th>
+                                    <th>Admin Status </th>
+                                    <th>Caller Status </th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -38,26 +39,5 @@
 
 @section('js')
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable({
-                processing: true,
-                serverside: true,
-                ajax: '{!!  route('leads.get') !!}',
-                columns: [
-                    {data: 'product_id', name: 'product_id'},
-                    {data: 'supplier_id', name: 'supplier_id'},
-                    {data: 'customer_id', name: 'customer_id'},
-                    {data: 'customer_phone', name: 'customer_phone'},
-                    {data: 'customer_address', name: 'customer_address'},
-                    {data: 'note', name: 'note'},
-                    {data: 'order_id', name: 'order_id'},
-                    {data: 'status_admin', name: 'status_admin'},
-                    {data: 'status_caller', name: 'status_caller'},
-                    {data: 'created_at', name: 'created_at'},
-                ]
-            });
-        });
-
-    </script>
+    <script src="/assets/custom-assets/js/leads.js"> </script>
 @endsection
