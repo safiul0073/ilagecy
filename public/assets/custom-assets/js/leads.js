@@ -15,43 +15,46 @@ const table = $('#datatable').DataTable({
         { data: 'status_caller', name: 'status_caller' },
         { data: 'created_at', name: 'created_at' },
     ],
-    "initComplete": function(settings, json) {
+    "fnDrawCallback": function () {
         handleChangeStatus()
     }
 });
 
+
 function handleChangeStatus() {
-    setTimeout(function () {
-        [...document.querySelectorAll('#change-status')].map(elem => {
-            elem.addEventListener('click', async function(e){
-                e.preventDefault();
-                let lead = await $.ajax({
-                    method: 'GET',
-                    url: '/api/leads/changeStatus',
-                    data: {
-                        leadId: e.currentTarget.dataset.leadid,
-                        status: e.currentTarget.dataset.status,
-                    }
-                });
-                table.ajax.reload(function(){
-                    handleChangeStatus()
-                    reRenderChangeStatus()
-                } , false);
-            })
-        });
-    }, 1000);
+    [...document.querySelectorAll('#change-status')].map(elem => {
+        elem.addEventListener('click', async function (e) {
+            e.preventDefault();
+            let lead = await $.ajax({
+                method: 'GET',
+                url: '/api/leads/changeStatus',
+                data: {
+                    leadId: e.currentTarget.dataset.leadid,
+                    status: e.currentTarget.dataset.status,
+                }
+            });
+            table.ajax.reload(function () { }, false);
+        })
+    });
 }
 
 
-function reRenderChangeStatus(params) {
-    [...document.querySelectorAll('a.paginate_button')].map(elem => {
-        elem.addEventListener('click', function () {
-            handleChangeStatus();
-        });
-    });
-}
-function inputChangeStatus(params) {
-    document.querySelector('#datatable_filter label input').addEventListener('change', function () {
-        handleChangeStatus();
-    });
-}
+
+
+
+
+// Function rendering after pagination
+// function reRenderChangeStatus() {
+//     [...document.querySelectorAll('a.paginate_button')].map(elem => {
+//         elem.addEventListener('click', function () {
+//             handleChangeStatus();
+//         });
+//     });
+// }
+
+// Function rendering after search
+// function inputChangeStatus() {
+//     document.querySelector('#datatable_filter label input').addEventListener('change', function () {
+//         handleChangeStatus();
+//     });
+// }

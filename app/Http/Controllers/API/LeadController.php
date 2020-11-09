@@ -44,13 +44,13 @@ class LeadController extends Controller
                 })
                 ->editColumn('action', function (Lead $lead) {
                     $html = '
-                    <a href="#" id="change-status" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-36px"></i></a>
+                    <a href="javascript;" id="change-status" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-36px"></i></a>
 
-                    <a href="#" id="change-status" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-36px"></i></a>
+                    <a href="javascript;" id="change-status" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-36px"></i></a>
 
-                    <a href="#" id="change-status" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-36px"></i></a>
+                    <a href="javascript;" id="change-status" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-36px"></i></a>
 
-                    <a href="#" id="change-status" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-36px"></i></a>
+                    <a href="javascript;" id="change-status" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-36px"></i></a>
                     ';
                     return $html;
                 })
