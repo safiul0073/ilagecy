@@ -54,6 +54,14 @@ class LeadController extends Controller
                     ';
                     return $html;
                 })
+                ->editColumn('note', function (Lead $lead) {
+                    $html = $lead->note . '<br>
+                    <a href="javascript;" class="btn btn-primary noteButton" data-toggle="modal" data-target="#exampleModal" data-leadid="' . $lead->id  . '" data-note="' . $lead->note  . '"><i class="mdi mdi-plus"></i></a>
+
+                    ';
+                    return $html;
+                })
+                 ->rawColumns(['note','action'])
                 ->make(true);
     }
 
@@ -61,6 +69,14 @@ class LeadController extends Controller
     {
         $lead = Lead::find(request()->input('leadId'))->update([
             'status_admin' => request()->input('status')
+        ]);
+        return $lead;
+    }
+
+    public function changeNote(Request $request)
+    {
+        $lead = Lead::find($request->leadId)->update([
+            'note' => $request->currentNote
         ]);
         return $lead;
     }

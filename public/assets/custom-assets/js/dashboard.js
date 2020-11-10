@@ -2,8 +2,6 @@ const backgroundColor =["#FF0000", "#008000", "#FFA500", "#800000"];
 
 (async function (params) {
     $('#date-range').datepicker({ toggleActive: true });
-    // $('#start').val('');
-    // $('#end').val('');
     $('.select2.select2-container.select2-container').addClass('w-100');
 
     let statuses = await $.ajax({ url: '/api/leads/count-status' });

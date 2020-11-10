@@ -15,4 +15,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('/leads/get', [LeadController::class, 'getLeads'])->name('leads.get');
 
     Route::get('/leads/changeStatus', [LeadController::class, 'changeStatus'])->name('leads.change.status');
+    Route::post('/leads/changeNote', [LeadController::class, 'changeNote'])->name('leads.change.note');
 // });

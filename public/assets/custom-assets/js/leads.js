@@ -17,14 +17,17 @@ const table = $('#datatable').DataTable({
     ],
     "fnDrawCallback": function () {
         handleChangeStatus()
+        handleNoteButton()
     }
 });
-
 
 function handleChangeStatus() {
     [...document.querySelectorAll('#change-status')].map(elem => {
         elem.addEventListener('click', async function (e) {
             e.preventDefault();
+            const height = window.pageYOffset;
+            $('.loadingio-spinner-spinner-e1xmlecchsl').show();
+            $('.card').hide();
             let lead = await $.ajax({
                 method: 'GET',
                 url: '/api/leads/changeStatus',
@@ -33,10 +36,62 @@ function handleChangeStatus() {
                     status: e.currentTarget.dataset.status,
                 }
             });
-            table.ajax.reload(function () { }, false);
+            table.ajax.reload(function () {
+                $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+                $('.card').show();
+                window.scrollTo(0, height);
+            }, false);
         })
     });
 }
+
+
+function handleNote() {
+    document.querySelector('.saveNoteButton').addEventListener('click', async function () {
+        const height = window.pageYOffset;
+        currentNote = document.querySelector('textarea.note').value
+        leadId = document.querySelector('textarea.note').dataset.leadid
+        $('.card').hide();
+
+        $("button[data-dismiss=\"modal\"]").click();
+        $('.loadingio-spinner-spinner-e1xmlecchsl').show();
+
+        let lead = await $.ajax({
+            method: 'POST',
+            url: '/api/leads/changeNote',
+            data: {
+                currentNote,
+                leadId
+            }
+        });
+
+        table.ajax.reload(function () {
+            $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+            $('.card').show();
+            window.scrollTo(0, height);
+        }, false);
+    });
+}
+
+function handleNoteButton() {
+    let currentNote;
+    let leadId;
+    [...document.querySelectorAll('.noteButton')].map(function (elem) {
+        elem.addEventListener('click', function (e) {
+            currentNote = e.currentTarget.dataset.note;
+            leadId = e.currentTarget.dataset.leadid;
+            document.querySelector('textarea.note').value = currentNote
+            document.querySelector('textarea.note').dataset.leadid = leadId
+        });
+    }, false);
+}
+
+
+window.addEventListener('load', function () {
+    $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+    handleNote()
+});
+
 
 
 
