@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('contents')
     @include('layouts.includes.breadcrumb',['title' => 'Leads'])
-    @include('layouts.includes.spinner')
     @include('layouts.includes.lead_modal_note')
+    @include('layouts.includes.lead_modal_edit')
 
 
     <div class="container-fluid">
@@ -24,6 +24,7 @@
                                     <th>Admin Status </th>
                                     <th>Caller Status </th>
                                     <th>Created At</th>
+                                    <th>Postback</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,15 +44,4 @@
 @section('js')
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script src="/assets/custom-assets/js/leads.js"> </script>
-    <script>
-        window.addEventListener('load', function() {
-            // $('.noteButton').on('click', function(e) {
-            //     document.querySelector('textarea.note').value = e.currentTarget.dataset.note
-            // });
-            // $('.saveNoteButton').on('click', function(e) {
-            //     document.querySelector('textarea.note').value = e.currentTarget.dataset.note
-            // });
-        });
-
-    </script>
 @endsection

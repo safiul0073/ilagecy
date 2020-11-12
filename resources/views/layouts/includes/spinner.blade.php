@@ -136,13 +136,16 @@
     .loadingio-spinner-spinner-e1xmlecchsl {
         display: block;
         overflow: hidden;
-        background: none;
-        position: absolute;
-        left: 39%;
-        top: 18%;
+        background: rgba(0, 0, 0, .75);
+        position: fixed;
         z-index: 99999999999999999999;
         width: 100%;
         height: 100%;
+    }
+
+    .ldio-c192uyeztjg>div {
+        top: 45%;
+        left: 50%;
     }
 
 </style>

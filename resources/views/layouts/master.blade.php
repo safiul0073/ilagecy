@@ -31,6 +31,8 @@
 
 <body>
     @include('layouts.includes.preloader')
+    @include('layouts.includes.spinner')
+
 
     <div id="main-wrapper">
         @include('layouts.includes.header')
@@ -64,6 +66,10 @@
     <script src="/assets/libs/select2/dist/js/select2.min.js"></script>
     <script src="/dist/js/pages/forms/select2/select2.init.js"></script>
     <script src="/assets/libs/chart.js/dist/Chart.js"></script>
+    <script>
+        $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+
+    </script>
     @yield('js')
 
 </body>

@@ -7,6 +7,7 @@ use App\Models\Lead;
 use App\Services\GlobalProductIdService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
 class LeadController extends Controller
@@ -51,6 +52,10 @@ class LeadController extends Controller
                     <a href="javascript;" id="change-status" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-36px"></i></a>
 
                     <a href="javascript;" id="change-status" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-36px"></i></a>
+
+                    <a href="javascript;" class="change-lead" data-toggle="modal" data-target="#modalLeadEdit"  data-leadId="'. $lead->id .'" data-name="'. $lead->customer->name .'" data-phone="'. $lead->customer->phone .'" data-email="'. $lead->customer->email .'" data-address="'. $lead->customer->address .'" data-callerstatus="'. $lead->status_caller .'"><i class="mdi mdi-pencil mdi-36px"></i></a>
+
+                    <a href="javascript;" class="btn btn-danger" id="deleteLead"  data-leadid='. $lead->id . '>Delete</a>
                     ';
                     return $html;
                 })
@@ -61,7 +66,14 @@ class LeadController extends Controller
                     ';
                     return $html;
                 })
-                 ->rawColumns(['note','action'])
+                ->editColumn('postback', function (Lead $lead) {
+                    $postback = $lead->send_to_api ?  'btn-success' : 'btn-primary';
+                    $html = '
+                    <a href="javascript;" class="btn '.  $postback .' postback-confirm" data-leadid="'. $lead->id .'" data-productid="'. $lead->product_id .'" data-supplierid="'. $lead->supplier_id .'" data-orderid="'. $lead->order_id .'">Confirm</a>
+                    ';
+                    return $html;
+                })
+                 ->rawColumns(['note','action','postback'])
                 ->make(true);
     }
 
@@ -78,6 +90,43 @@ class LeadController extends Controller
         $lead = Lead::find($request->leadId)->update([
             'note' => $request->currentNote
         ]);
+        return $lead;
+    }
+
+    public function update(Request $request)
+    {
+        $lead = Lead::find($request['data']['lead_id'])->customer->update([
+            'name' => $request['data']['name'],
+            'phone' => $request['data']['phone'],
+            'email' => $request['data']['email'],
+            'address' => $request['data']['address'],
+        ]);
+
+        Lead::find($request['data']['lead_id'])->update(['status_caller' => $request['data']['callerstatus']]);
+        return $lead;
+    }
+
+    public function destroy(Request $request)
+    {
+        $lead = Lead::find($request->leadId)->delete();
+        return $lead;
+    }
+
+
+    public function postbackEndpoint(Request $request)
+    {
+        // $response = Http::get('http://127.0.0.1:8000/leads/sudo-postback', [
+        //     'product_id' => $request['data']['productid'],
+        //     'supplier_id' => $request['data']['supplierid'],
+        //     'order_id' => $request['data']['orderid']
+        // ]);
+
+        $response = Http::get('https://api.github.com/users/princerafid01');
+
+        $lead = Lead::find($request['data']['leadid'])->update([
+            'send_to_api' =>  $response->json()['node_id']
+        ]);
+
         return $lead;
     }
 }
