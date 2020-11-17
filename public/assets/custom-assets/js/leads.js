@@ -1,8 +1,20 @@
 let editLeadData = [];
 const table = $('#datatable').DataTable({
     processing: true,
-    serverside: true,
-    ajax: '/api/leads/get',
+    serverSide: true,
+    scrollX: true,
+    searching: false,
+    // scrollY: true,
+    ajax: {
+        url: '/api/leads/get',
+        data: function (d) {
+            d.from = $('#startDate').val();
+            d.to = $('#endDate').val();
+            d.status = $('#status_filter').val();
+            d.phone = $('#phone').val();
+            d.orderId = $('#orderId').val();
+        }
+    },
     columns: [
         { data: 'product_id', name: 'product_id' },
         { data: 'supplier_id', name: 'supplier_id' },
@@ -10,12 +22,12 @@ const table = $('#datatable').DataTable({
         { data: 'customer_phone', name: 'customer_phone' },
         { data: 'customer_address', name: 'customer_address' },
         { data: 'note', name: 'note' },
-        { data: 'order_id', name: 'order_id' },
-        { data: 'action', name: 'action' },
+        { data: 'order_id', name: 'order_id', searchable: false },
+        { data: 'action', name: 'action', searchable: false },
         { data: 'status_admin', name: 'status_admin' },
         { data: 'status_caller', name: 'status_caller' },
         { data: 'created_at', name: 'created_at' },
-        { data: 'postback', name: 'postback' },
+        { data: 'postback', name: 'postback', searchable: false },
     ],
     "fnDrawCallback": function () {
         handleChangeStatus();
@@ -211,7 +223,30 @@ function handlePostbackButton() {
     });
 }
 
+function handleFilteringSearch() {
+    $('.filter-search-submit').on('click', function () {
+        from = $("#startDate").val();
+        to = $("#endDate").val();
+        status = $('#status_filter').val();
+        phone = $('#phone').val();
+        orderId = $('#orderId').val();
+
+        if ((from && to) || status || phone || orderId) {
+            $('.loadingio-spinner-spinner-e1xmlecchsl').show();
+
+            table.on('draw', function () {
+                $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+            });
+            table.draw();
+        }
+    });
+}
+
 window.addEventListener('load', function () {
+    $('#date-range').datepicker({ toggleActive: true });
+    $('.select2.select2-container.select2-container').addClass('w-100');
+
+    handleFilteringSearch();
     handleNote();
     handleEdit();
 });
