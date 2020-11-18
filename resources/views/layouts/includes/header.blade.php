@@ -16,17 +16,22 @@
                     <!-- Logo icon -->
                     <b class="logo-icon">
                         <!-- Light Logo icon -->
-                        <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                        {{-- <img src="../../assets/images/logo-icon.png" alt="homepage"
+                            class="light-logo" /> --}}
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- Light Logo text -->
-                        <img src="../../assets/images/logo-text.png" class="light-logo" alt="homepage" />
+                        <span class="text-white">Wellnuss</span>
+                        {{-- <img src="../../assets/images/logo-text.png"
+                            class="light-logo" alt="homepage" /> --}}
                     </span>
                 </a>
                 <a class="sidebartoggler d-none d-md-block" href="javascript:void(0)" data-sidebartype="mini-sidebar">
-                    <i class="mdi mdi-toggle-switch mdi-toggle-switch-off font-20"></i>
+                    {{-- <i
+                        class="mdi mdi-toggle-switch mdi-toggle-switch-off font-20"></i>
+                    --}}
                 </a>
             </div>
             <!-- ============================================================== -->
@@ -35,11 +40,11 @@
             <!-- ============================================================== -->
             <!-- Toggle which is visible on mobile only -->
             <!-- ============================================================== -->
-            <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+            {{-- <a class="topbartoggler d-block d-md-none waves-effect waves-light"
+                href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="ti-more"></i>
-            </a>
+            </a> --}}
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -82,8 +87,8 @@
                 <!-- Messages -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    {{-- <a class="nav-link dropdown-toggle waves-effect waves-dark"
+                        href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="font-22 mdi mdi-email-outline"></i>
 
                     </a>
@@ -161,11 +166,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
                 <li class="nav-item dropdown border-right">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    {{-- <a class="nav-link dropdown-toggle waves-effect waves-dark"
+                        href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="mdi mdi-bell-outline font-22"></i>
                         <span class="badge badge-pill badge-info noti">3</span>
                     </a>
@@ -235,9 +240,19 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{-- <i class="fa fa-power-off m-r-5 m-l-5"></i>
+                        --}}
+                        Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="40">
@@ -268,7 +283,7 @@
                             <div class="dropdown-divider"></div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </nav>
