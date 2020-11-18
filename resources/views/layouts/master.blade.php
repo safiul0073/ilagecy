@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    @include('layouts.includes.preloader')
+    {{-- @include('layouts.includes.preloader') --}}
     @include('layouts.includes.spinner')
 
 

@@ -1,33 +1,36 @@
 let editLeadData = [];
+let newStatusForFilter = '';
+
 const table = $('#datatable').DataTable({
     processing: true,
     serverSide: true,
     scrollX: true,
+    scrollY: "500px",
     searching: false,
-    // scrollY: true,
+    fixedColumns: true,
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
             d.from = $('#startDate').val();
             d.to = $('#endDate').val();
-            d.status = $('#status_filter').val();
+            d.status = newStatusForFilter;
             d.phone = $('#phone').val();
             d.orderId = $('#orderId').val();
         }
     },
     columns: [
-        { data: 'product_id', name: 'product_id' },
-        { data: 'supplier_id', name: 'supplier_id' },
-        { data: 'customer_id', name: 'customer_id' },
-        { data: 'customer_phone', name: 'customer_phone' },
-        { data: 'customer_address', name: 'customer_address' },
-        { data: 'note', name: 'note' },
-        { data: 'order_id', name: 'order_id', searchable: false },
-        { data: 'action', name: 'action', searchable: false },
-        { data: 'status_admin', name: 'status_admin' },
-        { data: 'status_caller', name: 'status_caller' },
-        { data: 'created_at', name: 'created_at' },
-        { data: 'postback', name: 'postback', searchable: false },
+        { data: 'product_id', name: 'product_id', width: '30px' },
+        { data: 'supplier_id', name: 'supplier_id', width: '50px' },
+        { data: 'customer_id', name: 'customer_id', width: '80px' },
+        { data: 'customer_phone', name: 'customer_phone', width: '50px' },
+        { data: 'customer_address', name: 'customer_address', width: '100px' },
+        { data: 'note', name: 'note', width: '100px' },
+        { data: 'order_id', name: 'order_id', searchable: false, width: '50px' },
+        { data: 'action', name: 'action', searchable: false, width: '50px' },
+        { data: 'status_admin', name: 'status_admin', width: '50px' },
+        { data: 'status_caller', name: 'status_caller', width: '50px' },
+        { data: 'created_at', name: 'created_at', width: '50px' },
+        { data: 'postback', name: 'postback', searchable: false, width: '50px' },
     ],
     "fnDrawCallback": function () {
         handleChangeStatus();
@@ -227,7 +230,6 @@ function handleFilteringSearch() {
     $('.filter-search-submit').on('click', function () {
         from = $("#startDate").val();
         to = $("#endDate").val();
-        status = $('#status_filter').val();
         phone = $('#phone').val();
         orderId = $('#orderId').val();
 
@@ -239,6 +241,18 @@ function handleFilteringSearch() {
             });
             table.draw();
         }
+    });
+
+    $('.statuses #changeStatus').on('click', function (e) {
+        e.preventDefault();
+        newStatusForFilter = e.currentTarget.dataset.status
+
+        $('.loadingio-spinner-spinner-e1xmlecchsl').show();
+
+        table.on('draw', function () {
+            $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+        });
+        table.draw();
     });
 }
 

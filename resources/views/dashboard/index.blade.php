@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('contents')
-    @include('layouts.includes.breadcrumb',['title' => 'Dashboard'])
+    {{-- @include('layouts.includes.breadcrumb',['title' => 'Dashboard'])
+    --}}
 
     <div class="container-fluid">
         <div class="row">

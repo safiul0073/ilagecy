@@ -31,3 +31,32 @@
     color: #000;
     font-size: 19px;
 }
+
+.navbar-brand {
+    background: #272C30;
+}
+
+#navbarSupportedContent {
+    background: #343A40 !important;
+    color: #979A9D !important;
+}
+
+#navbarSupportedContent a {
+    color: #979A9D;
+}
+
+.dropdown .dropdown-item:hover {
+    background-color: transparent !important;
+}
+
+body {
+    font-family: Nunito, sans-serif;
+}
+
+tbody>tr>td {
+    word-break: break-all;
+}
+
+table {
+    color: #43474A !important;
+}
