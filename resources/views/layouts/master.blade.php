@@ -18,6 +18,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">
     <!-- Custom CSS -->
     <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,400&display=swap"
+        rel="stylesheet">
     <link href="/assets/custom.css" rel="stylesheet">
     @yield('css')
 
