@@ -10,7 +10,7 @@
 #sidebarnav i,
 #sidebarnav a {
     color: #000;
-    opacity: .7
+    opacity: 0.7;
 }
 
 .sidebar-nav .has-arrow::after {
@@ -25,7 +25,6 @@
     color: #000;
 }
 
-
 #stats ul {
     list-style-type: none;
     color: #000;
@@ -33,30 +32,31 @@
 }
 
 .navbar-brand {
-    background: #272C30;
+    background: #272c30;
 }
 
 #navbarSupportedContent {
-    background: #343A40 !important;
-    color: #979A9D !important;
+    background: #343a40 !important;
+    color: #979a9d !important;
 }
 
 #navbarSupportedContent a {
-    color: #979A9D;
+    color: #979a9d;
 }
 
 .dropdown .dropdown-item:hover {
     background-color: transparent !important;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,700;0,900;1,200&display=swap");
 body {
     font-family: Nunito, sans-serif;
 }
 
-tbody>tr>td {
+/* tbody > tr > td {
     word-break: break-all;
-}
+} */
 
 table {
-    color: #43474A !important;
+    color: #43474a !important;
 }

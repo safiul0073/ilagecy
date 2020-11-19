@@ -5,9 +5,10 @@ const table = $('#datatable').DataTable({
     processing: true,
     serverSide: true,
     scrollX: true,
-    scrollY: "500px",
+    // scrollY: "500px",
     searching: false,
     fixedColumns: true,
+    // autoWidth: false,
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
@@ -19,18 +20,42 @@ const table = $('#datatable').DataTable({
         }
     },
     columns: [
-        { data: 'product_id', name: 'product_id', width: '30px' },
-        { data: 'supplier_id', name: 'supplier_id', width: '50px' },
-        { data: 'customer_id', name: 'customer_id', width: '80px' },
-        { data: 'customer_phone', name: 'customer_phone', width: '50px' },
-        { data: 'customer_address', name: 'customer_address', width: '100px' },
-        { data: 'note', name: 'note', width: '100px' },
-        { data: 'order_id', name: 'order_id', searchable: false, width: '50px' },
-        { data: 'action', name: 'action', searchable: false, width: '50px' },
-        { data: 'status_admin', name: 'status_admin', width: '50px' },
-        { data: 'status_caller', name: 'status_caller', width: '50px' },
-        { data: 'created_at', name: 'created_at', width: '50px' },
-        { data: 'postback', name: 'postback', searchable: false, width: '50px' },
+        { data: 'product_id', name: 'product_id',
+        // width: '30px'
+     },
+        { data: 'supplier_id', name: 'supplier_id',
+        // width: '50px'
+     },
+        { data: 'customer_id', name: 'customer_id',
+        // width: '80px'
+     },
+        { data: 'customer_phone', name: 'customer_phone',
+        // width: '50px'
+     },
+        { data: 'customer_address', name: 'customer_address',
+        // width: '100px'
+     },
+        { data: 'note', name: 'note',
+        // width: '100px'
+     },
+        { data: 'order_id', name: 'order_id', searchable: false,
+        // width: '50px'
+     },
+        { data: 'action', name: 'action', searchable: false,
+        // width: '50px'
+     },
+        { data: 'status_admin', name: 'status_admin',
+        // width: '50px'
+     },
+        { data: 'status_caller', name: 'status_caller',
+        // width: '50px'
+     },
+        { data: 'created_at', name: 'created_at',
+        // width: '50px'
+     },
+        { data: 'postback', name: 'postback', searchable: false,
+        // width: '50px'
+     },
     ],
     "fnDrawCallback": function () {
         handleChangeStatus();
