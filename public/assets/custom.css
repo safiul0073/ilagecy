@@ -54,10 +54,27 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-/* tbody > tr > td {
-    word-break: break-all;
-} */
+table tr:nth-child(even) {background-color: #f2f2f2!important;}
+
+table td,th{border-right: 1px solid #DEE2E6; border-left: 1px solid #DEE2E6;}
 
 table {
     color: #43474a !important;
+}
+
+#datatable i.mdi {
+    color: #236CA9!important;
+}
+
+#datatable .btn-primary{
+    background: #227DC7!important;
+    border: none;
+}
+
+.status-color {
+    width: 25px;
+    border-radius: 50%;
+    height: 25px;
+    display: inline-block;
+    margin-bottom: -6px;
 }

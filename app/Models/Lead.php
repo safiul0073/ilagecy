@@ -38,6 +38,14 @@ class Lead extends Model
         self::TRASH
     ];
 
+    public const COLORS = [
+        self::CONFIRMED => '#006400',
+        self::CANCELLED => '#FF0000',
+        self::HOLD => '#FFFF00',
+        self::TRASH => '#8A0000',
+    ];
+
+
     public function product()
     {
         return $this->hasOne(Product::class, 'id', 'product_id');

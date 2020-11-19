@@ -10,6 +10,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="card-title text-center mt-3">
+                        @foreach (App\Models\Lead::COLORS as $status => $color)
+                            <span class="status-color" style="background: {{ $color }}"></span>
+                            <span class="">{{ ucwords($status) }}</span>
+                        @endforeach
+                    </div>
                     <h4 class="ml-4 mb-0 pb-0">Filter Lead</h4>
 
                     <div class="card-body">
@@ -35,18 +41,10 @@
                                         placeholder="Order Id">
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-2">
-                                <select name="" id="status_filter" class="select2">
-                                    <option value="">Select a Status</option>
-                                    @foreach (App\Models\Lead::statuses as $status)
-                                        <option value="{{ $status }}">{{ $status }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="col-lg-4">
                                 <button class="btn btn-primary filter-search-submit">Search</button>
                                 <button class="btn btn-primary" onClick="(() => location.reload(true))()"><i
-                                        class="mdi mdi-refresh"></i></button>
+                                        class="mdi mdi-refresh text-white"></i></button>
                             </div>
                         </div>
 
@@ -54,25 +52,24 @@
                             <a href="javascript;" id="changeStatus" data-status="">All</a>
 
                             @foreach (App\Models\Lead::statuses as $status)
-                                - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ $status }}</a>
+                                - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
                             @endforeach
                         </div>
 
                         <table class="table" id="datatable">
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Supplier Name</th>
-                                    <th>Name</th>
+                                    <th>Product</th>
+                                    <th>OrderID</th>
+                                    <th>Created At</th>
+                                    <th>Customer</th>
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Note</th>
-                                    <th>Order Id</th>
-                                    <th>Action</th>
+                                    <th>Action </th>
                                     <th>Admin Status </th>
                                     <th>Caller Status </th>
-                                    <th>Created At</th>
-                                    <th>Postback</th>
+                                    <th>Confirm</th>
                                 </tr>
                             </thead>
                             <tbody>
