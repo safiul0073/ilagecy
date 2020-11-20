@@ -1,10 +1,8 @@
 @extends('layouts.master')
 @section('contents')
-    {{-- @include('layouts.includes.breadcrumb',['title' => 'Leads'])
-    --}}
     @include('layouts.includes.lead_modal_note')
     @include('layouts.includes.lead_modal_edit')
-
+    @include('layouts.includes.lead_duplicate_modal')
 
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -90,4 +88,5 @@
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="/assets/custom-assets/js/leads.js"> </script>
+    <script src="/assets/custom-assets/js/duplicate_leads.js"> </script>
 @endsection

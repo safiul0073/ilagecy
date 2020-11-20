@@ -50,10 +50,15 @@ class BuildDatatableService
         }
         return DataTables::of($query)
                 ->editColumn('product_id', function (Lead $lead) {
-                    return $lead->product ? $lead->product->name : '';
-                })
-                ->editColumn('supplier_id', function (Lead $lead) {
-                    return $lead->supplier ? $lead->supplier->name : '';
+                    $html  = $lead->product ? $lead->product->name : '';
+
+                    if (!$lead->note) {
+                        $html .= '<span class="badge badge-pill badge-danger">new</span>';
+                    }
+                    if ($lead->duplicate_id) {
+                        $html .= '<span class="badge badge-pill badge-danger duplicate_btn" data-customerid="' . $lead->customer_id . '" data-parent="' . $lead->duplicate_id . '" data-toggle="modal" data-target="#duplicateModal">duplicate</span>';
+                    }
+                    return $html;
                 })
                 ->editColumn('customer_id', function (Lead $lead) {
                     return $lead->customer ? $lead->customer->name : '';
@@ -103,7 +108,10 @@ class BuildDatatableService
                     ';
                     return $html;
                 })
-                 ->rawColumns(['note','action','postback','status_admin','status_caller'])
+                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
+                 ->order(function ($query) {
+                     $query->orderBy('id', 'desc');
+                 })
                 ->make(true);
     }
 }
