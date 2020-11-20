@@ -40,7 +40,3 @@ function handleDuplicate() {
     });
 }
 
-
-window.addEventListener('load', function () {
-    handleDuplicate();
-});

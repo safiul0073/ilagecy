@@ -71,6 +71,9 @@
     <script src="/dist/js/pages/forms/select2/select2.init.js"></script>
     <script src="/assets/libs/chart.js/dist/Chart.js"></script>
     <script>
+        window.addEventListener('load', function () {
+            $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
+        });
 
     </script>
     @yield('js')
