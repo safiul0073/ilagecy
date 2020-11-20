@@ -73,6 +73,8 @@ const table = $('#datatable').DataTable({
         // reRenderPagination();
         handleDeleteLead();
         handlePostbackButton();
+    handleDuplicate();
+
     }
 });
 
@@ -298,7 +300,6 @@ window.addEventListener('load', function () {
     handleNote();
     handleEdit();
 
-    handleDuplicate();
 
     $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 });
