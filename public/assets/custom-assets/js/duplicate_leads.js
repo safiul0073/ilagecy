@@ -21,6 +21,7 @@ const duplicateTable = $('#duplicate_datatable').DataTable({
         { data: 'created_at', name: 'created_at'}
     ],
     "fnDrawCallback": function () {
+        handleDuplicate();
     }
 });
 
