@@ -297,6 +297,8 @@ window.addEventListener('load', function () {
     handleFilteringSearch();
     handleNote();
     handleEdit();
+
+    $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 });
 
 
