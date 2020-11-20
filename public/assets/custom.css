@@ -1,0 +1,80 @@
+/* custom css */
+.left-sidebar {
+    background: #fff !important;
+}
+
+#sidebarnav {
+    background-color: #fff !important;
+}
+
+#sidebarnav i,
+#sidebarnav a {
+    color: #000;
+    opacity: 0.7;
+}
+
+.sidebar-nav .has-arrow::after {
+    border-color: #000 !important;
+}
+
+.navbar-header {
+    background: #fff !important;
+}
+
+.sidebartoggler.d-none.d-md-block i {
+    color: #000;
+}
+
+#stats ul {
+    list-style-type: none;
+    color: #000;
+    font-size: 19px;
+}
+
+.navbar-brand {
+    background: #272c30;
+}
+
+#navbarSupportedContent {
+    background: #343a40 !important;
+    color: #979a9d !important;
+}
+
+#navbarSupportedContent a {
+    color: #979a9d;
+}
+
+.dropdown .dropdown-item:hover {
+    background-color: transparent !important;
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,400&display=swap"); */
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+table tr:nth-child(even) {background-color: #f2f2f2!important;}
+
+table td,th{border-right: 1px solid #DEE2E6; border-left: 1px solid #DEE2E6;}
+
+table {
+    color: #43474a !important;
+}
+
+#datatable i.mdi {
+    color: #236CA9!important;
+}
+
+#datatable .btn-primary{
+    background: #227DC7!important;
+    border: none;
+}
+
+.status-color {
+    width: 25px;
+    border-radius: 50%;
+    height: 25px;
+    display: inline-block;
+    margin-bottom: -6px;
+}
