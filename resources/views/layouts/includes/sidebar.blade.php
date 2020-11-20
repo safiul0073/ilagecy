@@ -6,6 +6,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
+                @can('isAdmin')
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard') }}"
                         aria-expanded="false">
@@ -13,6 +14,7 @@
                         <span class="hide-menu">Dashboard </span>
                     </a>
                 </li>
+                @endcan
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.list') }}"
                         aria-expanded="false">
