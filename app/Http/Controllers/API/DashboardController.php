@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    private $product_id;
-    public function __construct(GlobalProductIdService $product_id)
-    {
-        $this->product_id = $product_id;
-    }
-
     public function countStatus()
     {
-        if ($this->product_id->get()) {
+        if (GlobalProductIdService::get()) {
             $leads = Lead::select('status_admin', DB::raw('count(*) as total'))
                  ->groupBy('status_admin')
-                 ->where('product_id', $this->product_id->get())
+                 ->where('product_id', GlobalProductIdService::get())
                  ->get();
         } else {
             $leads = Lead::select('status_admin', DB::raw('count(*) as total'))
@@ -39,8 +33,8 @@ class DashboardController extends Controller
         $startDate = date('Y-m-d', strtotime($request['startDate']));
         $endDate = date('Y-m-d', strtotime($request['endDate']));
 
-        if (!$request['productFilter'] && $this->product_id->get()) {
-            $leads->where('product_id', $this->product_id->get());
+        if (!$request['productFilter'] && GlobalProductIdService::get()) {
+            $leads->where('product_id', GlobalProductIdService::get());
         }
 
         if ($request['startDate'] && $request['endDate']) {

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GlobalProductIdService
 {
-    public function get()
+    public static function get()
     {
         return intval(Storage::disk('local')->get('id.txt'));
     }

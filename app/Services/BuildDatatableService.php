@@ -13,12 +13,6 @@ use Yajra\DataTables\Facades\DataTables;
 // 10321496
 class BuildDatatableService
 {
-    private static $product_id;
-    public function __construct(GlobalProductIdService $product_id)
-    {
-        self::$product_id = $product_id->get();
-    }
-
     public static function make()
     {
         $query = Lead::query();
@@ -45,8 +39,8 @@ class BuildDatatableService
             $query->where('order_id', request()->get('orderId'));
         }
 
-        if (self::$product_id) {
-            $query->where('product_id', self::$product_id);
+        if (GlobalProductIdService::get()) {
+            $query->where('product_id', GlobalProductIdService::get());
         }
         return DataTables::of($query)
                 ->editColumn('product_id', function (Lead $lead) {
