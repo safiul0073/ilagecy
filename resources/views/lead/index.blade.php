@@ -47,16 +47,27 @@
                         </div>
 
                         <div class="statuses mb-4">
+                            <input type="hidden" name="role" value="{{ auth()->user()->role }}" id="role">
                             <a href="javascript;" id="changeStatus" data-status="">All</a>
+                            @can('isAdmin')
 
-                            @foreach (App\Models\Lead::statuses as $status)
-                                - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
-                            @endforeach
+                                @foreach (App\Models\Lead::statuses as $status)
+                                    - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
+                                @endforeach
+
+                            @elsecan('isCaller')
+
+                                @foreach (App\Models\Lead::CALLER_STATUS as $status)
+                                    - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
+                                @endforeach
+
+                            @endcan
                         </div>
 
                         <table class="table" id="datatable">
                             <thead>
                                 <tr>
+                                    <th>Lead ID</th>
                                     <th>Product</th>
                                     <th>OrderID</th>
                                     <th>Created At</th>

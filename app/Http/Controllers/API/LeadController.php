@@ -8,6 +8,7 @@ use App\Services\BuildDatatableService;
 use App\Services\Lead\UpdateLeadService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 

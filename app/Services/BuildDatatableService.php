@@ -6,6 +6,7 @@ use App\Models\Lead;
 use App\Services\GlobalProductIdService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,7 +27,7 @@ class BuildDatatableService
 
         $status = request()->get('status');
         if (request()->get('status')) {
-            $query->where('status_admin', $status);
+            $query->where('status_caller', $status);
         }
 
         if (request()->get('phone')) {
@@ -42,6 +43,11 @@ class BuildDatatableService
         if (GlobalProductIdService::get()) {
             $query->where('product_id', GlobalProductIdService::get());
         }
+
+        if (request()->get('role') === 'caller') {
+            $query->where('status_caller', '!=', 'confirmed');
+        }
+
         return DataTables::of($query)
                 ->editColumn('product_id', function (Lead $lead) {
                     $html  = $lead->product ? $lead->product->name : '';

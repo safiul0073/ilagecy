@@ -38,6 +38,12 @@ class Lead extends Model
         self::TRASH
     ];
 
+    public const CALLER_STATUS = [
+        self::CANCELLED,
+        self::HOLD,
+        self::TRASH
+    ];
+
     public const COLORS = [
         self::CONFIRMED => '#006400',
         self::CANCELLED => '#FF0000',

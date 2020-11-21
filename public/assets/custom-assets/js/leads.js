@@ -1,6 +1,9 @@
 let editLeadData = [];
 let newStatusForFilter = '';
 
+// pagination change
+$.fn.DataTable.ext.pager.numbers_length = 17;
+
 const table = $('#datatable').DataTable({
     processing: true,
     serverSide: true,
@@ -12,6 +15,7 @@ const table = $('#datatable').DataTable({
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
+            d.role = $('#role').val();
             d.from = $('#startDate').val();
             d.to = $('#endDate').val();
             d.status = newStatusForFilter;
@@ -20,6 +24,10 @@ const table = $('#datatable').DataTable({
         }
     },
     columns: [
+        {
+            data: 'id', name: 'id',
+            // width: '30px'
+        },
         {
             data: 'product_id', name: 'product_id',
             // width: '30px'
