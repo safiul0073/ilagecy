@@ -31,6 +31,8 @@ class DashboardController extends Controller
         $products = Product::all();
         $suppliers = Supplier::all();
 
+
+
         return view('dashboard.index', compact('products', 'suppliers'));
     }
 }

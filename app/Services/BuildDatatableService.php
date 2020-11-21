@@ -36,7 +36,7 @@ class BuildDatatableService
         }
 
         if (request()->get('orderId')) {
-            $query->where('order_id', request()->get('orderId'));
+            $query->where('order_id', 'like', '%' . request()->get('orderId') . '%');
         }
 
         if (GlobalProductIdService::get()) {
