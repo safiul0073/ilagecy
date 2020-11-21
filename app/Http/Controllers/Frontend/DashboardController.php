@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Services\GlobalProductIdService;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
@@ -31,7 +32,9 @@ class DashboardController extends Controller
         $products = Product::all();
         $suppliers = Supplier::all();
 
-
+        if (Gate::denies('isAdmin')) {
+            return redirect()->route('leads.list');
+        }
 
         return view('dashboard.index', compact('products', 'suppliers'));
     }
