@@ -1,5 +1,6 @@
 let editLeadData = [];
 let newStatusForFilter = '';
+let role = $('#role').val();
 
 // pagination change
 $.fn.DataTable.ext.pager.numbers_length = 17;
@@ -60,12 +61,13 @@ const table = $('#datatable').DataTable({
             data: 'action', name: 'action', searchable: false,
             // width: '50px'
         },
+
         {
-            data: 'status_caller', name: 'status_caller',
+            data: 'status_admin', name: 'status_admin', visible: $('#role').val() === 'admin' ? true : false
             // width: '50px'
         },
         {
-            data: 'status_admin', name: 'status_admin', visible: $('#role').val() === 'admin' ? true : false
+            data: 'status_caller', name: 'status_caller',
             // width: '50px'
         },
 
@@ -81,7 +83,7 @@ const table = $('#datatable').DataTable({
         // reRenderPagination();
         handleDeleteLead();
         handlePostbackButton();
-    handleDuplicate();
+        handleDuplicate();
 
     }
 });
@@ -99,6 +101,7 @@ function handleChangeStatus() {
                 data: {
                     leadId: e.currentTarget.dataset.leadid,
                     status: e.currentTarget.dataset.status,
+                    role: role
                 }
             });
             table.ajax.reload(function () {

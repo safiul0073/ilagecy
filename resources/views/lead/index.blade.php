@@ -76,6 +76,9 @@
                                     <th>Address</th>
                                     <th>Note</th>
                                     <th>Action </th>
+                                    @can('isCaller')
+                                    <th>Caller Status </th>
+                                    @endcan
                                     @can('isAdmin')
                                         <th>Admin Status </th>
                                     @endcan

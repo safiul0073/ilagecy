@@ -21,9 +21,17 @@ class LeadController extends Controller
 
     public function changeStatus()
     {
-        $lead = Lead::find(request()->input('leadId'))->update([
-            'status_admin' => request()->input('status')
-        ]);
+        if (request()->input('role') === 'admin') {
+            $lead = Lead::find(request()->input('leadId'))->update([
+                'status_admin' => request()->input('status')
+            ]);
+        }
+
+        if (request()->input('role') === 'caller') {
+            $lead = Lead::find(request()->input('leadId'))->update([
+                'status_caller' => request()->input('status')
+            ]);
+        }
         return $lead;
     }
 
