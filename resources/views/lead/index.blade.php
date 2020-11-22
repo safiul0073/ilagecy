@@ -76,9 +76,13 @@
                                     <th>Address</th>
                                     <th>Note</th>
                                     <th>Action </th>
-                                    <th>Admin Status </th>
+                                    @can('isAdmin')
+                                        <th>Admin Status </th>
+                                    @endcan
                                     <th>Caller Status </th>
-                                    <th>Confirm</th>
+                                    @can('isAdmin')
+                                        <th>Confirm</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
