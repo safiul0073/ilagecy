@@ -57,8 +57,15 @@ class LeadController extends Controller
 
     public function getLeadDuplicate()
     {
-        $query = Lead::where('duplicate_id', request()->get('duplicateLeadId'))
-                        ->where('customer_id', request()->get('customerId'));
+        $query = Lead::Where(function ($query) {
+            $query->where('duplicate_id', request()->get('duplicateLeadId'))
+                ->where('customer_id', request()->get('customerId'));
+        })->orWhere(function ($query) {
+            $query->where("id", request()->get('duplicateLeadId'));
+        });
+
+        // $query = Lead::where('duplicate_id', request()->get('duplicateLeadId'))
+        //                 ->where('customer_id', request()->get('customerId'));
 
 
         return DataTables::of($query)
