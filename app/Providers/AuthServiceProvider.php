@@ -32,7 +32,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isCaller', function ($user) {
             return $user->role === 'caller';
         });
-
-        //
     }
 }

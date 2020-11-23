@@ -12,3 +12,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/leads/list', [LeadController::class, 'index'])->name('leads.list');
 });
+
+Route::prefix('api')->group(base_path('routes/customApi.php'));
