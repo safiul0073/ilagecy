@@ -14,3 +14,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::prefix('api')->group(base_path('routes/customApi.php'));
+
+Route::get('/temp', [HomeController::class, 'temp']);
