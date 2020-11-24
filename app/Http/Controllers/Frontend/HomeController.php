@@ -22,21 +22,31 @@ class HomeController extends Controller
 
     public function temp()
     {
-        $leads = Lead::all();
-        foreach ($leads as $lead) {
-            // $phone_last     = substr($lead->phone, -7);
-            // $duplicate      = null;
-            $duplicate_lead = Lead::query()
+        // $leads = Lead::all();
+        $count  =0;
+
+        Lead::chunk(10000, function ($leads) use ($count) {
+            foreach ($leads as $lead) {
+                $count++;
+                var_dump($count);
+
+                // $phone_last     = substr($lead->phone, -7);
+                // $duplicate      = null;
+                $duplicate_lead = Lead::query()
                                   ->where('id', '!=', $lead->id)
                                   ->where('customer_id', '=', $lead->customer_id)
                                   ->where('product_id', '=', $lead->product_id)
                                   ->orderBy('created_at', 'ASC')
                                   ->first();
 
-            if ($duplicate_lead) {
-                $lead->duplicate_id       = $duplicate_lead->id;
-                $lead->save();
+                if ($duplicate_lead) {
+                    $lead->duplicate_id       = $duplicate_lead->id;
+                    $lead->save();
+                } else {
+                    $lead->duplicate_id       = null;
+                    $lead->save();
+                }
             }
-        }
+        });
     }
 }
