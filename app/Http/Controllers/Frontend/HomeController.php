@@ -39,12 +39,22 @@ class HomeController extends Controller
                                   ->orderBy('created_at', 'ASC')
                                   ->first();
 
+                $first_customer = Lead::query()
+                                  ->where('id', '!=', $lead->id)
+                                  ->where('customer_id', '=', $lead->customer_id)
+                                  ->orderBy('created_at', 'ASC')
+                                  ->first();
                 if ($duplicate_lead) {
                     $lead->duplicate_id       = $duplicate_lead->id;
                     $lead->save();
                 } else {
                     $lead->duplicate_id       = null;
                     $lead->save();
+                }
+
+                if ($first_customer) {
+                    $first_customer->duplicate_id       = null;
+                    $first_customer->save();
                 }
             }
         });
