@@ -1,5 +1,7 @@
 let duplicateLeadId ='';
 let customerId ='';
+// let role = $('#role').val();
+
 const duplicateTable = $('#duplicate_datatable').DataTable({
     processing: true,
     serverSide: true,
@@ -16,7 +18,7 @@ const duplicateTable = $('#duplicate_datatable').DataTable({
         { data: 'product_id', name: 'product_id'},
         { data: 'phone', name: 'phone'},
         { data: 'order_id', name: 'order_id'},
-        { data: 'status_admin', name: 'status_admin'},
+        { data: 'status_admin', name: 'status_admin' , visible: (role === 'caller') ? false:true},
         { data: 'status_caller', name: 'status_caller'},
         { data: 'created_at', name: 'created_at'}
     ],
