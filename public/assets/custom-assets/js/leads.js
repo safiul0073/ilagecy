@@ -87,6 +87,7 @@ const table = $('#datatable').DataTable({
         },
     ],
     "fnDrawCallback": function () {
+        $('#gotoPageNumber').val('');
         handleChangeStatus();
         handleNoteButton();
         handleEditButton();
