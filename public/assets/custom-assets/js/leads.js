@@ -62,10 +62,10 @@ const table = $('#datatable').DataTable({
             // width: '50px'
         },
 
-        {
-            data: 'status_admin', name: 'status_admin', visible: $('#role').val() === 'admin' ? true : false
-            // width: '50px'
-        },
+        // {
+        //     data: 'status_admin', name: 'status_admin', visible: false
+        //     // width: '50px'
+        // },
         {
             data: 'status_caller', name: 'status_caller',
             // width: '50px'

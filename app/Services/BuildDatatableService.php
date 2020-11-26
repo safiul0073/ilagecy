@@ -102,7 +102,7 @@ class BuildDatatableService
                 ->editColumn('postback', function (Lead $lead) {
                     $postback = $lead->send_to_api ?  'btn-success' : 'btn-primary';
                     $html = '
-                    <a href="javascript;" class="btn '.  $postback .' postback-confirm" data-leadid="'. $lead->id .'" data-productid="'. $lead->product_id .'" data-supplierid="'. $lead->supplier_id .'" data-orderid="'. $lead->order_id .'" data-adminstatus="'. $lead->status_admin .'" data-note="'. $lead->note .'">Confirm</a>
+                    <a href="javascript;" class="btn '.  $postback .' postback-confirm" data-leadid="'. $lead->id .'" data-productid="'. $lead->product_id .'" data-supplierid="'. $lead->supplier_id .'" data-orderid="'. $lead->order_id .'" data-callerstatus="'. $lead->status_caller.'" data-note="'. $lead->note .'">Confirm</a>
                     ';
                     return $html;
                 })

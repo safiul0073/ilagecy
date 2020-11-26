@@ -22,7 +22,8 @@ class HomeController extends Controller
 
     public function temp()
     {
-        $leads = Lead::take(10000)->get();
+        set_time_limit(420);
+        $leads = Lead::skip(79754)->take(60)->get();
         $count  =0;
 
         // Lead::chunk(10000, function ($leads) use ($count) {

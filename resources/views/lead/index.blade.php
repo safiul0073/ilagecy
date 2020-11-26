@@ -76,12 +76,12 @@
                                     <th>Address</th>
                                     <th>Note</th>
                                     <th>Action </th>
-                                    @can('isCaller')
+                                    {{-- @can('isCaller')
                                     <th>Caller Status </th>
-                                    @endcan
-                                    @can('isAdmin')
+                                    @endcan --}}
+                                    {{-- @can('isAdmin')
                                         <th>Admin Status </th>
-                                    @endcan
+                                    @endcan --}}
                                     <th>Caller Status </th>
                                     @can('isAdmin')
                                         <th>Confirm</th>

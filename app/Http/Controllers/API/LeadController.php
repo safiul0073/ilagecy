@@ -97,7 +97,7 @@ class LeadController extends Controller
 
     public function postbackEndpoint(Request $request)
     {
-        switch ($request['data']['adminstatus']) {
+        switch ($request['data']['callerstatus']) {
             case 'confirmed':
                 $status = 'confirm';
                 break;
