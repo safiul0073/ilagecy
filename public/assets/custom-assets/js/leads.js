@@ -2,9 +2,9 @@ let editLeadData = [];
 let newStatusForFilter = '';
 let role = $('#role').val();
 
-var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-var dateOne = new Date(date.getFullYear(), date.getMonth(), '01');
+// var date = new Date();
+// var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+// var dateOne = new Date(date.getFullYear(), date.getMonth(), '01');
 
 // pagination change
 $.fn.DataTable.ext.pager.numbers_length = 17;
@@ -20,9 +20,9 @@ const table = $('#datatable').DataTable({
         url: '/api/leads/get',
         data: function (d) {
 
-            $('#date-range').datepicker({ toggleActive: true});
-            $('#startDate').datepicker('setDate' , dateOne);
-            $('#endDate').datepicker('setDate' , today);
+            // $('#date-range').datepicker({ toggleActive: true});
+            // $('#startDate').datepicker('setDate' , dateOne);
+            // $('#endDate').datepicker('setDate' , today);
 
 
             d.role = $('#role').val();
