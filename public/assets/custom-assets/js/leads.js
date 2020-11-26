@@ -2,6 +2,10 @@ let editLeadData = [];
 let newStatusForFilter = '';
 let role = $('#role').val();
 
+var date = new Date();
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+var dateOne = new Date(date.getFullYear(), date.getMonth(), '01');
+
 // pagination change
 $.fn.DataTable.ext.pager.numbers_length = 17;
 
@@ -9,13 +13,18 @@ const table = $('#datatable').DataTable({
     processing: true,
     serverSide: true,
     scrollX: true,
-    // scrollY: "500px",
     searching: false,
     fixedColumns: true,
-    // autoWidth: false,
+    order: [[ 3, "desc" ]],
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
+
+            $('#date-range').datepicker({ toggleActive: true});
+            $('#startDate').datepicker('setDate' , dateOne);
+            $('#endDate').datepicker('setDate' , today);
+
+
             d.role = $('#role').val();
             d.from = $('#startDate').val();
             d.to = $('#endDate').val();
@@ -27,6 +36,7 @@ const table = $('#datatable').DataTable({
     columns: [
         {
             data: 'id', name: 'id',
+            orderable: true
             // width: '30px'
         },
         {
@@ -34,7 +44,7 @@ const table = $('#datatable').DataTable({
             // width: '30px'
         },
         {
-            data: 'order_id', name: 'order_id', searchable: false,
+            data: 'order_id', name: 'order_id',
             // width: '50px'
         },
         {
@@ -58,7 +68,7 @@ const table = $('#datatable').DataTable({
             // width: '100px'
         },
         {
-            data: 'action', name: 'action', searchable: false,
+            data: 'action', name: 'action',
             // width: '50px'
         },
 
@@ -72,7 +82,7 @@ const table = $('#datatable').DataTable({
         },
 
         {
-            data: 'postback', name: 'postback', searchable: false, visible: $('#role').val() === 'admin' ? true : false
+            data: 'postback', name: 'postback', visible: $('#role').val() === 'admin' ? true : false
             // width: '50px'
         },
     ],
@@ -84,9 +94,23 @@ const table = $('#datatable').DataTable({
         handleDeleteLead();
         handlePostbackButton();
         handleDuplicate();
-
+        handleLongPagination();
+        handleGotoPage();
     }
 });
+
+function handleLongPagination() {
+    document.querySelector('#datatable_next').addEventListener('click',function(){
+        table.page(table.page() + 14).draw(false)
+    });
+}
+
+function handleGotoPage(){
+    document.querySelector('#gotoPage').addEventListener('click',function(){
+        let gotoPageNumber = $('#gotoPageNumber').val();
+        table.page(gotoPageNumber - 1).draw(false)
+    });
+}
 
 function handleChangeStatus() {
     [...document.querySelectorAll('#change-status')].map(elem => {
@@ -292,7 +316,7 @@ function handleFilteringSearch() {
 
     $('.statuses #changeStatus').on('click', function (e) {
         e.preventDefault();
-        newStatusForFilter = e.currentTarget.dataset.status
+        newStatusForFilter = e.currentTarget.dataset.status;
 
         $('.loadingio-spinner-spinner-e1xmlecchsl').show();
 
@@ -304,7 +328,15 @@ function handleFilteringSearch() {
 }
 
 window.addEventListener('load', function () {
-    $('#date-range').datepicker({ toggleActive: true });
+    // var date = new Date();
+    // var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    // var dateOne = new Date(date.getFullYear(), date.getMonth(), '01');
+
+    // $('#date-range').datepicker({ toggleActive: true});
+    //  $('#startDate').datepicker('setDate' , dateOne);
+    //  $('#endDate').datepicker('setDate' , today);
+
+    //  $('#endDate').val('');
     $('.select2.select2-container.select2-container').addClass('w-100');
 
     handleFilteringSearch();

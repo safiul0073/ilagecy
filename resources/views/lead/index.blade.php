@@ -46,22 +46,33 @@
                             </div>
                         </div>
 
-                        <div class="statuses mb-4">
-                            <input type="hidden" name="role" value="{{ auth()->user()->role }}" id="role">
-                            <a href="javascript;" id="changeStatus" data-status="">All</a>
-                            @can('isAdmin')
+                        <div class="row">
+                            <div class="col-lg-6 statuses mb-4 mt-2">
+                                <input type="hidden" name="role" value="{{ auth()->user()->role }}" id="role">
+                                <a href="javascript;" id="changeStatus" data-status="">All</a>
+                                @can('isAdmin')
 
-                                @foreach (App\Models\Lead::statuses as $status)
-                                    - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
-                                @endforeach
+                                    @foreach (App\Models\Lead::statuses as $status)
+                                        - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
+                                    @endforeach
 
-                            @elsecan('isCaller')
+                                @elsecan('isCaller')
 
-                                @foreach (App\Models\Lead::CALLER_STATUS as $status)
-                                    - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
-                                @endforeach
+                                    @foreach (App\Models\Lead::CALLER_STATUS as $status)
+                                        - <a href="javascript;" id="changeStatus" data-status="{{ $status }}">{{ ucwords($status) }}</a>
+                                    @endforeach
 
-                            @endcan
+                                @endcan
+                            </div>
+
+                            <div class="col-lg-6 mb-4 ">
+                                <div class="goto-wrapper float-right">
+                                    <label for="page">Page:</label>
+                                    <input type="number" class="p-1" id="gotoPageNumber">
+                                    <button id="gotoPage" class="btn btn-primary">Go</button>
+                                </div>
+
+                            </div>
                         </div>
 
                         <table class="table" id="datatable">
