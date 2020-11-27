@@ -9,7 +9,6 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Leads:</h4>
-        @can('isAdmin')
 
                         <div class="filter row">
                             <div class="col-lg-4">
@@ -56,9 +55,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @endcan
-
                     </div>
                 </div>
             </div>

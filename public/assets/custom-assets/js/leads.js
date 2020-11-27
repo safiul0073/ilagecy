@@ -82,7 +82,7 @@ const table = $('#datatable').DataTable({
         },
 
         {
-            data: 'postback', name: 'postback', visible: $('#role').val() === 'admin' ? true : false
+            data: 'postback', name: 'postback', orderable: 'false' ,  visible: $('#role').val() === 'admin' ? true : false
             // width: '50px'
         },
     ],
