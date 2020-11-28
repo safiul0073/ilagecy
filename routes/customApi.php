@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\LeadController;
+use App\Http\Controllers\API\UserController;
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/leads/count-status', [ DashboardController::class, 'countStatus']);
@@ -16,4 +17,6 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::delete('/leads/delete', [LeadController::class, 'destroy'])->name('leads.delete');
 
     Route::post('/leads/postback-endpoint', [LeadController::class, 'postbackEndpoint'])->name('leads.postback');
+
+    Route::get('/users/get', [UserController::class, 'getUsers'])->name('users.get');
 });

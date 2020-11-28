@@ -109,12 +109,8 @@
     </div>
 
 @endsection
-@section('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-@endsection
 
 @section('js')
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="/assets/custom-assets/js/leads.js"> </script>
     <script src="/assets/custom-assets/js/duplicate_leads.js"> </script>

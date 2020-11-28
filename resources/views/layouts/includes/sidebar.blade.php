@@ -23,6 +23,14 @@
                         <span class="hide-menu">Users </span>
                     </a>
                 </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('suppliers.index') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-account-multiple-outline"></i>
+                        <span class="hide-menu">Suppliers </span>
+                    </a>
+                </li>
                 @endcan
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.list') }}"
