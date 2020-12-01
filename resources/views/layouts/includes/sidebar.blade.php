@@ -24,7 +24,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('suppliers.index') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-account-multiple-outline"></i>
@@ -38,7 +38,7 @@
                         <i class="mdi mdi-archive"></i>
                         <span class="hide-menu">Products </span>
                     </a>
-                </li>
+                </li> --}}
 
                 @endcan
                 <li class="sidebar-item">
