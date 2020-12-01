@@ -23,4 +23,16 @@ class UserController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
     }
+
+    public function getTrashUsers()
+    {
+        $query = User::onlyTrashed();
+
+        return DataTables::of($query)
+                ->addColumn('action', function (User $user) {
+                    return "<a href='" . route('users.restore', $user->id) . "' class='btn btn-success'>Restore</a>";
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+    }
 }

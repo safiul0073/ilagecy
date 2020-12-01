@@ -12,7 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        $users = User::all();
+        $trashes = User::onlyTrashed()->get();
+
+        return view('user.index', compact('trashes', 'users'));
     }
 
     public function create()
@@ -41,5 +44,29 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+    }
+
+    public function trash()
+    {
+        $users = User::all();
+        $trashes = User::onlyTrashed()->get();
+
+        return view('user.trash', compact('trashes', 'users'));
+    }
+
+    public function restore($id)
+    {
+        User::withTrashed()->find($id)->restore();
+
+        return redirect()->route('users.index')->with('success', 'User restored successfully!');
+    }
+
+    public function restoreAll()
+    {
+        User::withTrashed()->get()->map(function ($user) {
+            $user->restore();
+        });
+
+        return redirect()->route('users.index')->with('success', 'Users restored successfully!');
     }
 }

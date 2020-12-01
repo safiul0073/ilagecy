@@ -22,9 +22,7 @@
                     </div>
 
 
-
-
-                    <table class="table" id="user-datatable">
+                    <table class="table" id="trash-user-datatable">
                         <thead>
                             <tr>
                                 <th>Id </th>
@@ -46,5 +44,5 @@
 @endsection
 
 @section('js')
-    <script src="/assets/custom-assets/js/users.js"> </script>
+    <script src="/assets/custom-assets/js/users-trash.js"> </script>
 @endsection

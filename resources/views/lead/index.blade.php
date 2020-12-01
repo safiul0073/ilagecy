@@ -63,6 +63,7 @@
                                     @endforeach
 
                                 @endcan
+
                             </div>
 
                             <div class="col-lg-6 mb-4 ">

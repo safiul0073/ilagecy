@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/leads/postback-endpoint', [LeadController::class, 'postbackEndpoint'])->name('leads.postback');
 
     Route::get('/users/get', [UserController::class, 'getUsers'])->name('users.get');
+    Route::get('/users/trash/get', [UserController::class, 'getTrashUsers'])->name('users.trash.get');
     Route::get('/suppliers/get', [SupplierController::class, 'getSuppliers'])->name('suppliers.get');
     Route::get('/products/get', [ProductController::class, 'getProducts'])->name('products.get');
 });
