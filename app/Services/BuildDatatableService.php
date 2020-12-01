@@ -106,7 +106,10 @@ class BuildDatatableService
                     ';
                     return $html;
                 })
-                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
+                ->order(function ($query) {
+                    $query->orderBy('updated_at', 'asc');
+                })
+                ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
                 ->make(true);
     }
 }
