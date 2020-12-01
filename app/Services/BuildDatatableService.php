@@ -107,7 +107,7 @@ class BuildDatatableService
                     return $html;
                 })
                 ->order(function ($query) {
-                    $query->orderBy('updated_at', 'asc');
+                    $query->orderBy('updated_at', 'desc');
                 })
                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
                 ->make(true);
