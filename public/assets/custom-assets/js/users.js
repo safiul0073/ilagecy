@@ -10,7 +10,7 @@ const userTable = $('#user-datatable').DataTable({
         {data: 'name', name: 'name'},
         {data: 'email', name: 'email'},
         {data: 'role', name: 'role'},
-        {data: 'action', name: 'action'},
+        {data: 'action', name: 'action' , orderable: 'false'},
     ],
     "fnDrawCallback": function(){
         handleUserDelete();

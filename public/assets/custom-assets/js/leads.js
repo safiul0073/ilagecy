@@ -68,7 +68,7 @@ const table = $('#datatable').DataTable({
             // width: '100px'
         },
         {
-            data: 'action', name: 'action',
+            data: 'action', name: 'action', orderable: 'false'
             // width: '50px'
         },
 
