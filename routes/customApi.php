@@ -4,6 +4,7 @@ use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\LeadController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\API\ProductController;
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/leads/count-status', [ DashboardController::class, 'countStatus']);
@@ -21,4 +22,5 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     Route::get('/users/get', [UserController::class, 'getUsers'])->name('users.get');
     Route::get('/suppliers/get', [SupplierController::class, 'getSuppliers'])->name('suppliers.get');
+    Route::get('/products/get', [ProductController::class, 'getProducts'])->name('products.get');
 });

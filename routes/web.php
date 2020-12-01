@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LeadController;
+use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\SupplierController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/users', UserController::class);
     Route::resource('/suppliers', SupplierController::class);
+    Route::resource('/products', ProductController::class);
     Route::get('/leads/list', [LeadController::class, 'index'])->name('leads.list');
 });
 

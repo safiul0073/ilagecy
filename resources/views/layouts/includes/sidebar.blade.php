@@ -19,7 +19,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index') }}"
                         aria-expanded="false">
-                        <i class="mdi mdi-account-multiple-outline"></i>
+                        <i class="mdi mdi-account"></i>
                         <span class="hide-menu">Users </span>
                     </a>
                 </li>
@@ -31,6 +31,15 @@
                         <span class="hide-menu">Suppliers </span>
                     </a>
                 </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('products.index') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-archive"></i>
+                        <span class="hide-menu">Products </span>
+                    </a>
+                </li>
+
                 @endcan
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.list') }}"
