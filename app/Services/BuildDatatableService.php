@@ -70,6 +70,9 @@ class BuildDatatableService
                 ->editColumn('created_at', function (Lead $lead) {
                     return Carbon::parse($lead->created_at);
                 })
+                ->editColumn('updated_at', function (Lead $lead) {
+                    return Carbon::parse($lead->updated_at);
+                })
                 ->editColumn('action', function (Lead $lead) {
                     $html = '
                     <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-24px"></i></a>
