@@ -110,6 +110,9 @@ class BuildDatatableService
                     return $html;
                 })
                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
+                // ->order(function ($query) {
+                //     $query->orderBy('created_at', 'desc');
+                // })
                 ->make(true);
     }
 }

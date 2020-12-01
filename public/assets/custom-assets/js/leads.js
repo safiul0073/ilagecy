@@ -15,7 +15,7 @@ const table = $('#datatable').DataTable({
     scrollX: true,
     searching: false,
     fixedColumns: true,
-    order: [[ 4, "desc" ]],
+    order: [[ 3, "desc" ]],
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
@@ -35,8 +35,7 @@ const table = $('#datatable').DataTable({
     },
     columns: [
         {
-            data: 'id', name: 'id',
-            orderable: true
+            data: 'id', name: 'id'
             // width: '30px'
         },
         {
@@ -51,10 +50,11 @@ const table = $('#datatable').DataTable({
             data: 'created_at', name: 'created_at',
             // width: '50px'
         },
-        {
-            data: 'updated_at', name: 'updated_at',
-            // width: '50px'
-        },
+        // {
+        //     data: 'updated_at', name: 'updated_at',
+        //     orderable: true
+        //     // width: '50px'
+        // },
         {
             data: 'customer_id', name: 'customer_id',
             // width: '80px'
