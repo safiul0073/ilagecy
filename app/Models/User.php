@@ -19,9 +19,9 @@ class User extends Authenticatable
     public const ROLE_CALLER = 'caller';
 
     public const ROLES = [
-        self::ROLE_SUPERMAN,
+        // self::ROLE_SUPERMAN,
         self::ROLE_ADMIN,
-        self::ROLE_SUPERVISOR,
+        // self::ROLE_SUPERVISOR,
         self::ROLE_CALLER,
     ];
 
