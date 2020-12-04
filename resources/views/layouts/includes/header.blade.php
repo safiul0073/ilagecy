@@ -29,9 +29,9 @@
                     </span>
                 </a>
                 <a class="sidebartoggler d-none d-md-block" href="javascript:void(0)" data-sidebartype="mini-sidebar">
-                    {{-- <i
+                    <i
                         class="mdi mdi-toggle-switch mdi-toggle-switch-off font-20"></i>
-                    --}}
+
                 </a>
             </div>
             <!-- ============================================================== -->
