@@ -7,6 +7,21 @@
         @method('POST')
     @endif
 
+    @if(isset($product))
+        <div class="form-group">
+            <label for="id">ID  <span
+                class="text-danger">*</span></label>
+            <input type="text" name="id" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="id" value="{{ old('id' , $product->id ?? '')}}">
+
+            @error('id')
+                <span class="alert alert-danger mt-3 d-block" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    @endif
+
+
     <div class="form-group">
         <label for="name">Name  <span
             class="text-danger">*</span></label>

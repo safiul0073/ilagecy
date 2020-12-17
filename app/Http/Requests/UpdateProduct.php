@@ -24,6 +24,7 @@ class UpdateProduct extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'required',
             'name' => 'required',
             'note' => 'nullable',
         ];
