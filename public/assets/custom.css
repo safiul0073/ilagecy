@@ -78,3 +78,10 @@ table {
     display: inline-block;
     margin-bottom: -6px;
 }
+#main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"], #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] ul, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"], #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"] ul {
+    background: #ECECEC;
+}
+
+.in .sidebar-item.active {
+    background:#fff;
+}

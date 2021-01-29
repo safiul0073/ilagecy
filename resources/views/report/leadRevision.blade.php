@@ -1,23 +1,24 @@
 @extends('layouts.master')
 @section('contents')
-    @include('layouts.includes.lead_modal_note')
+    {{-- @include('layouts.includes.lead_modal_note')
     @include('layouts.includes.lead_modal_edit')
-    @include('layouts.includes.lead_duplicate_modal')
+    @include('layouts.includes.lead_duplicate_modal') --}}
 
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-title text-center mt-3">
+                    {{-- <div class="card-title text-center mt-3">
                         @foreach (App\Models\Lead::COLORS as $status => $color)
                             <span class="status-color" style="background: {{ $color }}"></span>
                             <span class="">{{ ucwords($status) }}</span>
                         @endforeach
-                    </div>
+                    </div> --}}
                     <h4 class="ml-4 mb-0 pb-0">Filter Lead</h4>
 
+
                     <div class="card-body">
-                        <form action="{{ route('leads.export') }}" method="POST">
+                        <form action="{{ route('reports.export') }}" method="POST">
                             @csrf
                             <div class="filter row mb-3">
                                 <div class="col-lg-4">
@@ -43,7 +44,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <button class="btn btn-primary filter-search-submit">Search</button>
-                                    <button class="btn btn-primary" id="export-to-excel">Export to Excel</button>
+                                    {{-- <button class="btn btn-primary" id="export-to-excel">Export to Excel</button> --}}
                                     <button class="btn btn-primary" onClick="(() => location.reload(true))()"><i
                                             class="mdi mdi-refresh text-white"></i></button>
                                 </div>
@@ -80,29 +81,16 @@
                             </div>
                         </div>
 
-                        <table class="table" id="datatable">
+                        <table class="table" id="report-datatable">
                             <thead>
                                 <tr>
                                     <th>Lead ID</th>
-                                    <th>Product</th>
                                     <th>OrderID</th>
-                                    <th>Created At</th>
-                                    {{-- <th>Updated At</th> --}}
                                     <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Note</th>
-                                    <th>Action </th>
-                                    {{-- @can('isCaller')
-                                    <th>Caller Status </th>
-                                    @endcan --}}
-                                    {{-- @can('isAdmin')
-                                        <th>Admin Status </th>
-                                    @endcan --}}
-                                    <th>Caller Status </th>
-                                    @can('isAdmin')
-                                        <th>Confirm</th>
-                                    @endcan
+                                    <th>Caller </th>
+                                    <th>Product</th>
+                                    <th>Last Modified At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,8 +104,13 @@
 
 @endsection
 
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+
+@endsection
 @section('js')
     <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="/assets/custom-assets/js/leads.js"> </script>
-    <script src="/assets/custom-assets/js/duplicate_leads.js"> </script>
+    <script src="/assets/custom-assets/js/reports.js"> </script>
+
+    {{-- <script src="/assets/custom-assets/js/duplicate_leads.js"> </script> --}}
 @endsection

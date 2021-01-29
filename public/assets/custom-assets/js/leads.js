@@ -1,6 +1,7 @@
 let editLeadData = [];
 let newStatusForFilter = '';
 let role = $('#role').val();
+$('#date-range').datepicker({ toggleActive: true });
 
 // var date = new Date();
 // var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -303,7 +304,8 @@ function handlePostbackButton() {
 }
 
 function handleFilteringSearch() {
-    $('.filter-search-submit').on('click', function () {
+    $('.filter-search-submit').on('click', function (e) {
+        e.preventDefault();
         from = $("#startDate").val();
         to = $("#endDate").val();
         phone = $('#phone').val();

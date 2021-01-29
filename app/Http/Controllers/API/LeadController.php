@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Lead;
 use App\Services\BuildDatatableService;
 use App\Services\Lead\UpdateLeadService;
+use App\Services\Timeline\TimelineCreateService;
 use Carbon\Carbon;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
 class LeadController extends Controller
@@ -33,6 +31,11 @@ class LeadController extends Controller
                 'status_caller' => request()->input('status')
             ]);
         }
+
+        TimelineCreateService::create(request()->input('leadId'), 'EDIT_STATUS');
+
+
+
         return $lead;
     }
 
@@ -41,6 +44,8 @@ class LeadController extends Controller
         $lead = Lead::find($request->leadId)->update([
             'note' => $request->currentNote
         ]);
+
+        TimelineCreateService::create($request->leadId, 'EDIT_NOTE');
         return $lead;
     }
 
@@ -160,6 +165,8 @@ class LeadController extends Controller
         $lead = Lead::find($request['data']['leadid'])->update([
             'send_to_api' =>  $json_response
         ]);
+
+        TimelineCreateService::create($request['data']['leadid'], 'EDIT_CONFIRM');
 
         return $lead;
     }

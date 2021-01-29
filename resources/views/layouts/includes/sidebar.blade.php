@@ -55,6 +55,47 @@
                         <span class="hide-menu">Leads</span>
                     </a>
                 </li>
+
+                @can('isAdmin')
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript;" aria-expanded="false">
+                        <i class="mdi mdi-book"></i>
+                        <span class="hide-menu">Reports</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ route('reports.list') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu"> Lead's Revision </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{ route('reports.todaysConfirm') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu"> Today's Confirm </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{ route('reports.dailyReports') }}" class="sidebar-link">
+                                <i class="mdi mdi-adjust"></i>
+                                <span class="hide-menu"> Daily Reports </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('callers.report') }}"
+                            aria-expanded="false">
+                            <i class="mdi mdi-phone"></i>
+                            <span class="hide-menu">Callers</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
