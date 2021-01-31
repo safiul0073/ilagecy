@@ -45,6 +45,9 @@ class ReportController extends Controller
             $query->where('status_caller', Lead::CONFIRMED);
         }
 
+        $query->where('caller_id', '!=', 0);
+
+
         return DataTables::of($query)
         // ->addColumn('customer_phone', function (Lead $lead) {
             // return $lead->customer ? $lead->customer->phone : '';
@@ -79,8 +82,8 @@ class ReportController extends Controller
         $startDate = date('Y-m-d', strtotime(request()->get('from')));
         $endDate = date('Y-m-d', strtotime(request()->get('to')));
         if (request()->get('from') && request()->get('to')) {
-            $query->whereDate('created_at', '>=', $startDate)
-                    ->whereDate('created_at', '<=', $endDate);
+            $query->whereDate('updated_at', '>=', $startDate)
+                    ->whereDate('updated_at', '<=', $endDate);
         }
 
         $status = request()->get('status');
@@ -102,9 +105,9 @@ class ReportController extends Controller
             $query->where('product_id', GlobalProductIdService::get());
         }
 
-        if (request()->get('confirm')) {
-            $query->where('status_caller', Lead::CONFIRMED);
-        }
+
+
+        $query->where('caller_id', '!=', 0);
 
         return DataTables::of($query)
         // ->addColumn('customer_phone', function (Lead $lead) {
@@ -122,7 +125,11 @@ class ReportController extends Controller
         ->editColumn('updated_at', function (Lead $lead) {
             return Carbon::parse($lead->updated_at);
         })
-        // ->rawColumns(['action'])
+        ->editColumn('status_caller', function (Lead $lead) {
+            $html = '<span class="status-color" style="background: '. Lead::COLORS[$lead->status_caller] .'"></span>';
+            return $html;
+        })
+        ->rawColumns(['status_caller'])
         ->make(true);
     }
 }

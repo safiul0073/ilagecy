@@ -74,14 +74,14 @@
                         <li class="sidebar-item">
                             <a href="{{ route('reports.todaysConfirm') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu"> Today's Confirm </span>
+                                <span class="hide-menu"> Daily Reports </span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="{{ route('reports.dailyReports') }}" class="sidebar-link">
                                 <i class="mdi mdi-adjust"></i>
-                                <span class="hide-menu"> Daily Reports </span>
+                                <span class="hide-menu"> Daily Status </span>
                             </a>
                         </li>
                     </ul>

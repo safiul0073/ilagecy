@@ -32,6 +32,7 @@ const table = $('#report-datatable').DataTable({
         {data: 'caller_id', name: 'caller_id'},
         {data: 'product_id', name: 'product_id'},
         {data: 'updated_at', name: 'updated_at'},
+        {data: 'status_caller', name: 'status_caller'},
     ],
   //   dom: 'Bfrtip',
   // buttons: [

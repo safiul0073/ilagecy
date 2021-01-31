@@ -41,8 +41,12 @@ class LeadController extends Controller
 
     public function changeNote(Request $request)
     {
+        $caller_name = auth()->user()->name;
+        $caller_id = auth()->user()->id;
+        $current_timestamp = date('d-m-Y H:i:s', $_SERVER['REQUEST_TIME']);
+
         $lead = Lead::find($request->leadId)->update([
-            'note' => $request->currentNote
+            'note' => $request->currentNote . " || $caller_name ( $caller_id  ) - $current_timestamp"
         ]);
 
         TimelineCreateService::create($request->leadId, 'EDIT_NOTE');

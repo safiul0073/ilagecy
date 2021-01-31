@@ -16,7 +16,9 @@ class ReportController extends Controller
 
     public function export(Request $request)
     {
-        return Excel::download(new ReportsExport($request), 'reports.xlsx');
+        $current_timestamp = date('d_m_Y_H_i_s', $_SERVER['REQUEST_TIME']);
+        ;
+        return Excel::download(new ReportsExport($request), $current_timestamp.'_reports.xlsx');
     }
 
     public function todaysConfirm()

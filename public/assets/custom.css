@@ -85,3 +85,9 @@ table {
 .in .sidebar-item.active {
     background:#fff;
 }
+
+.filter-search-submit { margin-right: 20px;}
+
+.lead_caller_info {
+    color: #F74F4F;
+}

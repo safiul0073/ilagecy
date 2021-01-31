@@ -8,12 +8,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
-                    {{-- <div class="card-title text-center mt-3">
+                    <div class="card-title text-center mt-3">
                         @foreach (App\Models\Lead::COLORS as $status => $color)
                             <span class="status-color" style="background: {{ $color }}"></span>
                             <span class="">{{ ucwords($status) }}</span>
                         @endforeach
-                    </div> --}}
+                    </div>
                     <h4 class="ml-4 mb-0 pb-0">Filter Lead</h4>
 
 
@@ -90,6 +90,7 @@
                                     <th>Caller </th>
                                     <th>Product</th>
                                     <th>Last Modified At</th>
+                                    <th>Caller Status</th>
                                 </tr>
                             </thead>
                             <tbody>
