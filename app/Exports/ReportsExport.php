@@ -71,18 +71,17 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     public function map($lead): array
     {
         return [
-            $lead->id,
-            $lead->order_id,
             $lead->customer->name ?? '',
-            $lead->caller->name ?? '',
+            $lead->customer->address ?? '',
+            $lead->customer->phone ?? '',
+            $lead->note ?? '',
             $lead->product->name ?? '',
-            $lead->updated_at,
          ];
     }
 
     public function headings() : array
     {
-        return ["Lead ID", "Order Id", "Customer Name","Caller Name" , "Product Name" , "Last Modified At"];
+        return ["Customer Name","Address" , "Phone" , "Note" , "Product Name"];
     }
 
     /**
