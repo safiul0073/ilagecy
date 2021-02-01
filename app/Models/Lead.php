@@ -71,4 +71,9 @@ class Lead extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function real_caller()
+    {
+        return $this->belongsTo(User::class)->where('role', 'caller');
+    }
 }
