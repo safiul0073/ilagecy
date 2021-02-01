@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="chat-time">
 
-                                    {{ $timeline->created_at->format("h:m a , d-m-Y ") }} ( {{ $timeline->created_at->diffForHumans() }} )
+                                    {{ $timeline->updated_at->format("h:m a , d-m-Y ") }} ( {{ $timeline->created_at->diffForHumans() }} )
                                 </div>
                             </li>
 
