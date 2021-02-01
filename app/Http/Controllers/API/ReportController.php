@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public function getReports()
     {
-        $query = Lead::query();
+        $query = Lead::with(['caller']);
 
         $startDate = date('Y-m-d', strtotime(request()->get('from')));
         $endDate = date('Y-m-d', strtotime(request()->get('to')));
@@ -47,9 +47,9 @@ class ReportController extends Controller
         }
 
         $query->where('caller_id', '!=', 0);
-        $query->where(function ($q) {
-            $q->caller->where('role', 'caller');
-        });
+        // $query->where(function ($q) {
+        //     dd($q);
+        // });
 
 
         return DataTables::of($query)
