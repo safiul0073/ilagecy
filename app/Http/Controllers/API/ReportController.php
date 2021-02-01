@@ -18,8 +18,8 @@ class ReportController extends Controller
         $startDate = date('Y-m-d', strtotime(request()->get('from')));
         $endDate = date('Y-m-d', strtotime(request()->get('to')));
         if (request()->get('from') && request()->get('to')) {
-            $query->whereDate('created_at', '>=', $startDate)
-                    ->whereDate('created_at', '<=', $endDate);
+            $query->whereDate('updated_at', '>=', $startDate)
+                    ->whereDate('updated_at', '<=', $endDate);
         }
 
         $status = request()->get('status');
