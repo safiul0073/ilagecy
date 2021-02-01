@@ -26,9 +26,7 @@
                                     <div class="box bg-light-info">{{ $timeline->task }}</div>
                                 </div>
                                 <div class="chat-time">
-                                    {{ $timeline->updated_at }}
-
-                                    {{ $timeline->updated_at->format("h:m a , d-m-Y ") }} ( {{ $timeline->updated_at->diffForHumans() }} )
+                                    {{ $timeline->updated_at }} ( {{ $timeline->updated_at->diffForHumans() }} )
                                 </div>
                             </li>
 
