@@ -48,7 +48,7 @@ class ReportController extends Controller
 
         $query->where('caller_id', '!=', 0);
         $query->where(function ($q) {
-            $q->caller()->where('role', 'caller');
+            $q->caller->where('role', 'caller');
         });
 
 
