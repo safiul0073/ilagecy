@@ -47,9 +47,9 @@ class ReportController extends Controller
         }
 
         $query->where('caller_id', '!=', 0);
-        $query->where(function ($q) {
-            $q->with('real_caller');
-        });
+        $query->whereHas('caller', function ($query) {
+            return $query->where('role', 'caller');
+        })->get();
 
 
         return DataTables::of($query)
