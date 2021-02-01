@@ -13,7 +13,9 @@ class ReportController extends Controller
 {
     public function getReports()
     {
-        $query = Lead::query();
+        $query = Lead::with(['caller' => function ($q) {
+            $q->where('role', 'caller');
+        }]);
 
         $startDate = date('Y-m-d', strtotime(request()->get('from')));
         $endDate = date('Y-m-d', strtotime(request()->get('to')));
