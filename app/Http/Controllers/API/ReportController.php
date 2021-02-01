@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use App\Models\User;
 use App\Services\GlobalProductIdService;
 use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
@@ -13,7 +14,7 @@ class ReportController extends Controller
 {
     public function getReports()
     {
-        $query = Lead::with('real_caller');
+        $query = Lead::query();
 
         $startDate = date('Y-m-d', strtotime(request()->get('from')));
         $endDate = date('Y-m-d', strtotime(request()->get('to')));
@@ -46,6 +47,9 @@ class ReportController extends Controller
         }
 
         $query->where('caller_id', '!=', 0);
+        $query->where(function ($q) {
+            $q->caller()->where('role', 'caller');
+        });
 
 
         return DataTables::of($query)
