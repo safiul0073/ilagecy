@@ -47,10 +47,10 @@ const table = $('#datatable').DataTable({
             data: 'order_id', name: 'order_id',
             // width: '50px'
         },
-        {
-            data: 'created_at', name: 'created_at',
+        // {
+            // data: 'created_at', name: 'created_at',
             // width: '50px'
-        },
+        // },
         // {
         //     data: 'updated_at', name: 'updated_at',
         //     orderable: true
@@ -70,7 +70,7 @@ const table = $('#datatable').DataTable({
         },
         {
             data: 'note', name: 'note',
-            // width: '100px'
+            width: '100px'
         },
         {
             data: 'action', name: 'action', orderable: 'false'

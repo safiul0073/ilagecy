@@ -11,10 +11,8 @@ class LeadStatService
 {
     public static function get(Request $request, $date_column)
     {
-        $leads = Lead::select('status_admin', DB::raw('count(*) as total'))
-                 ->groupBy('status_admin');
-
-
+        $leads = Lead::select('status_caller', DB::raw('count(*) as total'))
+                 ->groupBy('status_caller');
 
         $startDate = date('Y-m-d', strtotime($request['startDate']));
         $endDate = date('Y-m-d', strtotime($request['endDate']));
@@ -38,7 +36,6 @@ class LeadStatService
 
         if ($request['callerFilter']) {
             $leads->where('caller_id', $request['callerFilter']);
-            // dd($leads->get());
         }
 
         return $leads->get();

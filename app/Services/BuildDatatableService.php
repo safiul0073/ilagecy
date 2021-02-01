@@ -75,15 +75,15 @@ class BuildDatatableService
                 })
                 ->editColumn('action', function (Lead $lead) {
                     $html = '
-                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-12px"></i></a>
 
-                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-12px"></i></a>
 
-                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-12px"></i></a>
 
-                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-12px"></i></a>
 
-                    <a href="javascript;" class="change-lead d-block text-center" data-toggle="modal" data-target="#modalLeadEdit"  data-leadId="'. $lead->id .'" data-name="'. ($lead->customer ? $lead->customer->name : '') .'" data-phone="'. ($lead->customer ? $lead->customer->phone : '') .'" data-email="'. ($lead->customer ? $lead->customer->email : '') .'" data-address="'. ($lead->customer ? $lead->customer->address : '') .'" data-callerstatus="'. $lead->status_caller .'"><i class="mdi mdi-pencil mdi-24px"></i></a>
+                    <a href="javascript;" class="btn btn-primary change-lead d-block text-center" data-toggle="modal" data-target="#modalLeadEdit"  data-leadId="'. $lead->id .'" data-name="'. ($lead->customer ? $lead->customer->name : '') .'" data-phone="'. ($lead->customer ? $lead->customer->phone : '') .'" data-email="'. ($lead->customer ? $lead->customer->email : '') .'" data-address="'. ($lead->customer ? $lead->customer->address : '') .'" data-callerstatus="'. $lead->status_caller .'"><i class="mdi mdi-pencil mdi-12px"></i></a>
                     ';
                     // $html .= '<a href="javascript;" class="btn btn-danger" id="deleteLead"  data-leadid='. $lead->id . '>Delete</a>';
                     return $html;
@@ -110,9 +110,6 @@ class BuildDatatableService
                     return $html;
                 })
                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
-                // ->order(function ($query) {
-                //     $query->orderBy('created_at', 'desc');
-                // })
                 ->make(true);
     }
 }

@@ -13,19 +13,19 @@ class CallerController extends Controller
 {
     public function filterSearch(Request $request)
     {
-        return LeadStatService::get($request, 'update_caller');
+        return LeadStatService::get($request, 'updated_at');
     }
 
     public function countStatus()
     {
         if (GlobalProductIdService::get()) {
-            $leads = Lead::select('status_admin', DB::raw('count(*) as total'))
-                 ->groupBy('status_admin')
+            $leads = Lead::select('status_caller', DB::raw('count(*) as total'))
+                 ->groupBy('status_caller')
                  ->where('product_id', GlobalProductIdService::get())
                  ->get();
         } else {
-            $leads = Lead::select('status_admin', DB::raw('count(*) as total'))
-                 ->groupBy('status_admin')
+            $leads = Lead::select('status_caller', DB::raw('count(*) as total'))
+                 ->groupBy('status_caller')
                  ->get();
         }
         return $leads;

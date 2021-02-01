@@ -91,3 +91,9 @@ table {
 .lead_caller_info {
     color: #F74F4F;
 }
+
+
+#datatable td a.btn-primary i {
+    color: #ddd !important;
+    font-weight: bolder !important;
+}

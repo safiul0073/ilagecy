@@ -86,7 +86,7 @@
                                     <th>Lead ID</th>
                                     <th>Product</th>
                                     <th>OrderID</th>
-                                    <th>Created At</th>
+                                    {{-- <th>Created At</th> --}}
                                     {{-- <th>Updated At</th> --}}
                                     <th>Customer</th>
                                     <th>Phone</th>
