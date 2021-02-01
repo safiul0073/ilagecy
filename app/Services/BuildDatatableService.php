@@ -89,8 +89,10 @@ class BuildDatatableService
                     return $html;
                 })
                 ->editColumn('note', function (Lead $lead) {
-                    $html = $lead->note . '<br>
-                    <a href="javascript;" class="noteButton" data-toggle="modal" data-target="#exampleModal" data-leadid="' . $lead->id  . '" data-note="' . $lead->note  . '"><i class="mdi mdi-plus mdi-24px"></i></a>
+                    $note_text = $lead->note && strpos($lead->note, '||') ? explode('||', $lead->note)[0] : $lead->note;
+                    $note_info = $lead->note && strpos($lead->note, '||')  ? " || " .  explode('||', $lead->note)[1] : '';
+                    $html =   $note_text  . "<span class='lead_caller_info'>".$note_info  . '</span><br>
+                    <a href="javascript;" class="noteButton" data-toggle="modal" data-target="#exampleModal" data-leadid="' . $lead->id  . '" data-note="' . $note_text  . '"><i class="mdi mdi-plus mdi-24px"></i></a>
                     ';
                     return $html;
                 })

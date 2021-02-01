@@ -5,7 +5,7 @@ const backgroundColor =["#FF0000", "#008000", "#FFA500", "#800000"];
     $('.select2.select2-container.select2-container').addClass('w-100');
 
     let statuses = await $.ajax({ url: '/api/leads/count-status' });
-    let labels = statuses.map(obj => obj.status_admin);
+    let labels = statuses.map(obj => obj.status_caller);
     let total = statuses.map(obj => obj.total);
 
     generateStats(statuses,total);
@@ -33,7 +33,7 @@ $('.filter-submit').on('click', async function (e) {
         return;
     }
 
-    let labels = statuses.map(obj => obj.status_admin);
+    let labels = statuses.map(obj => obj.status_caller);
     let total = statuses.map(obj => obj.total);
 
     renderNewChart();
@@ -65,7 +65,7 @@ function renderPieChart(labels, total , backgroundColor) {
 
 function generateStats(statuses , total, ) {
     let allTotals = total.reduce((a, b) => a + b, 0);
-    let stat = statuses.map(obj => `<li>${Math.ceil(obj.total/allTotals *100)}% ${obj.status_admin}</li>`);
+    let stat = statuses.map(obj => `<li>${Math.ceil(obj.total/allTotals *100)}% ${obj.status_caller}</li>`);
     document.querySelector('#stats ul').innerHTML = stat.join("");
 }
 
