@@ -11,6 +11,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    {{ date("h:m a , d-m-Y ") }}
+
 
                     <ul class="chat-list chat active-chat">
                         @foreach ($timelines as $timeline)
