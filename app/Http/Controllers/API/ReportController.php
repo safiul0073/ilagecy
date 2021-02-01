@@ -47,9 +47,9 @@ class ReportController extends Controller
         }
 
         $query->where('caller_id', '!=', 0);
-        // $query->where(function ($q) {
-        //     dd($q);
-        // });
+        $query->where(function ($q) {
+            $q->with('real_caller');
+        });
 
 
         return DataTables::of($query)
