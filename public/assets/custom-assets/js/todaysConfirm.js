@@ -16,7 +16,7 @@ const table = $('#report-datatable').DataTable({
     searching: false,
     order: [[ 0, "desc" ]],
     ajax: {
-        url: '/api/reports/get/custom',
+        url: '/api/reports/get',
         data: function (d) {
             d.role = $('#role').val();
             d.from = $('#startDate').val();
