@@ -16,7 +16,7 @@ const table = $('#datatable').DataTable({
     scrollX: true,
     searching: false,
     fixedColumns: true,
-    order: [[ 3, "desc" ]],
+    order: [[0, "desc" ]],
     ajax: {
         url: '/api/leads/get',
         data: function (d) {
