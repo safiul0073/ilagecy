@@ -29,7 +29,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     */
     public function collection()
     {
-        $query = Lead::select('id', 'order_id', 'customer_id', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
+        $query = Lead::select('id', 'order_id', 'customer_id', 'note', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
 
         $startDate = date('Y-m-d', strtotime($this->request['start']));
         $endDate = date('Y-m-d', strtotime($this->request['end']));
@@ -70,13 +70,13 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
     public function map($lead): array
     {
-        $phone ='';
-        if(isset($lead->customer->phone) && $lead->customer->phone == 0) {
-            $phone = strval($lead->customer->phone);
-        }
+        // $phone ='';
+        // if(isset($lead->customer->phone) && $lead->customer->phone == 0) {
+        //     $phone = strval($lead->customer->phone);
+        // }
         return [
             $lead->customer->name ?? '',
-            $phone,
+            $lead->customer->phone ?? '',
             $lead->customer->address ?? '',
             $lead->note ?? '',
             $lead->product->name ?? '',
@@ -85,7 +85,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
     public function headings() : array
     {
-        return ["Customer Name","Address" , "Phone" , "Note" , "Product Name"];
+        return ["Customer Name", "Phone" , "Address" , "Note" , "Product Name"];
     }
 
     /**
