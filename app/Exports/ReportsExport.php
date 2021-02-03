@@ -70,6 +70,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
     public function map($lead): array
     {
+        $phone ='';
         if(isset($lead->customer->phone) && $lead->customer->phone == 0) {
             $phone = strval($lead->customer->phone);
         }
