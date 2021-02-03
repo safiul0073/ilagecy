@@ -72,7 +72,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     {
         return [
             $lead->customer->name ?? '',
-            strval($lead->customer->phone) ?? '',
+            $lead->customer->phone ? strval($lead->customer->phone) : '',
             $lead->customer->address ?? '',
             $lead->note ?? '',
             $lead->product->name ?? '',
