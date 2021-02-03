@@ -29,7 +29,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     */
     public function collection()
     {
-        $query = Lead::select('id', 'order_id', 'note', 'customer_id', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
+        $query = Lead::select('id', 'order_id', 'customer_id', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
 
         $startDate = date('Y-m-d', strtotime($this->request['start']));
         $endDate = date('Y-m-d', strtotime($this->request['end']));
@@ -70,9 +70,12 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
     public function map($lead): array
     {
+        if($lead->customer->phone){
+            $phone = strval($lead->customer->phone);
+        }
         return [
             $lead->customer->name ?? '',
-            $lead->customer->phone ? strval($lead->customer->phone) : '',
+            $phone,
             $lead->customer->address ?? '',
             $lead->note ?? '',
             $lead->product->name ?? '',
