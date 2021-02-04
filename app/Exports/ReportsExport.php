@@ -37,6 +37,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
             $query->whereDate('updated_at', '>=', $startDate)
                     ->whereDate('updated_at', '<=', $endDate);
         }
+        //  Orderby ta fix koro to
 
         $status = $this->request['status'];
         if ($this->request['status']) {
@@ -71,7 +72,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
 
 
-        $query = $query->get();
+        $query = $query->orderBy('updated_at', 'desc')->get();
 
         $data = [];
 
