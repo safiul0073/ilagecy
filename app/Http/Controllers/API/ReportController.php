@@ -47,7 +47,7 @@ class ReportController extends Controller
         }
 
         // It will take only the leads that have caller ID ( that means processed Leads )
-        $query->where('caller_id', '!=', 0);
+        $query->where('caller_id', '!=', 0)->orderBy('updated_at', 'desc');
 
         // It will take only the leads that had been processed by a caller
         $query->whereHas('caller', function ($query) {
@@ -113,7 +113,7 @@ class ReportController extends Controller
 
 
 
-        $query->where('caller_id', '!=', 0);
+        $query->where('caller_id', '!=', 0)->orderBy('updated_at', 'desc');
 
         return DataTables::of($query)
         // ->addColumn('customer_phone', function (Lead $lead) {

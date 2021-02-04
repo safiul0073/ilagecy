@@ -32,7 +32,7 @@ class LeadController extends Controller
             ]);
         }
 
-        TimelineCreateService::create(request()->input('leadId'), 'EDIT_STATUS');
+        TimelineCreateService::create(request()->input('leadId'), 'EDIT_STATUS' , request()->input('status'));
 
 
 
@@ -44,12 +44,13 @@ class LeadController extends Controller
         $caller_name = auth()->user()->name;
         $caller_id = auth()->user()->id;
         $current_timestamp = date('d-m-Y H:i:s', $_SERVER['REQUEST_TIME']);
+        $note = $request->currentNote . " || $caller_name ( $caller_id  ) - $current_timestamp";
 
         $lead = Lead::find($request->leadId)->update([
-            'note' => $request->currentNote . " || $caller_name ( $caller_id  ) - $current_timestamp"
+            'note' => $note
         ]);
 
-        TimelineCreateService::create($request->leadId, 'EDIT_NOTE');
+        TimelineCreateService::create($request->leadId, 'EDIT_NOTE' , $note);
         return $lead;
     }
 
