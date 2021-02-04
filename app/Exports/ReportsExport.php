@@ -31,9 +31,9 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     {
         $query = Lead::select('id', 'order_id', 'customer_id', 'note', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
 
-        $startDate = date('Y-m-d', strtotime($this->request['from']));
-        $endDate = date('Y-m-d', strtotime($this->request['to']));
-        if ($this->request['from'] && $this->request['to']) {
+        $startDate = date('Y-m-d', strtotime($this->request['start']));
+        $endDate = date('Y-m-d', strtotime($this->request['end']));
+        if ($this->request['start'] && $this->request['end']) {
             $query->whereDate('updated_at', '>=', $startDate)
                     ->whereDate('updated_at', '<=', $endDate);
         }
