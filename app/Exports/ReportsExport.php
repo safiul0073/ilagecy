@@ -31,31 +31,47 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     {
         $query = Lead::select('id', 'order_id', 'customer_id', 'note', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
 
-        $startDate = date('Y-m-d', strtotime($this->request['start']));
-        $endDate = date('Y-m-d', strtotime($this->request['end']));
-        if ($this->request['start'] && $this->request['end']) {
-            $query->whereDate('created_at', '>=', $startDate)
-                    ->whereDate('created_at', '<=', $endDate);
+        $startDate = date('Y-m-d', strtotime(request()->get('from')));
+        $endDate = date('Y-m-d', strtotime(request()->get('to')));
+        if (request()->get('from') && request()->get('to')) {
+            $query->whereDate('updated_at', '>=', $startDate)
+                    ->whereDate('updated_at', '<=', $endDate);
         }
 
-        $status = $this->request['status'];
-        if ($this->request['status']) {
-            $query->where('status_caller', $status);
-        }
 
-        if ($this->request['phone']) {
-            $query->whereHas('customer', function ($customer) {
-                $customer->where('phone', 'like', '%' . $this->request['phone'] . '%');
+        if (request()->get('confirm')) {
+            $query->where('status_caller', Lead::CONFIRMED);
+            // It will take only the leads that had been processed by a caller
+            $query->whereHas('caller', function ($query) {
+                return $query->where('role', 'caller');
             });
         }
 
-        if ($this->request['orderId']) {
-            $query->where('order_id', 'like', '%' . $this->request['orderId'] . '%');
+
+        $status = request()->get('status');
+        if (request()->get('status')) {
+            $query->where('status_caller', $status);
+        }
+
+        if (request()->get('phone')) {
+            $query->whereHas('customer', function ($customer) {
+                $customer->where('phone', 'like', '%' . request()->get('phone') . '%');
+            });
+        }
+
+        if (request()->get('orderId')) {
+            $query->where('order_id', 'like', '%' . request()->get('orderId') . '%');
         }
 
         if (GlobalProductIdService::get()) {
             $query->where('product_id', GlobalProductIdService::get());
         }
+
+
+
+        $query->where('caller_id', '!=', 0);
+
+
 
         $query = $query->get();
 
@@ -70,10 +86,6 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
 
     public function map($lead): array
     {
-        // $phone ='';
-        // if(isset($lead->customer->phone) && $lead->customer->phone == 0) {
-        //     $phone = strval($lead->customer->phone);
-        // }
         return [
             $lead->customer->name ?? '',
             $lead->customer->phone ?? '',
