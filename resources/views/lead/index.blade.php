@@ -85,8 +85,14 @@
                                 <tr>
                                     <th>Lead ID</th>
                                     <th>Product</th>
-                                    <th>OrderID</th>
-                                    {{-- <th>Created At</th> --}}
+                                    @can('isAdmin')
+                                        <th>OrderId</th>
+                                        <th>Created At</th>
+                                    @endcan
+                                    @can('isCaller')
+                                        <th>Created At</th>
+                                        <th>Created At</th>
+                                    @endcan
                                     {{-- <th>Updated At</th> --}}
                                     <th>Customer</th>
                                     <th>Phone</th>

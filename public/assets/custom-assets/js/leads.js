@@ -44,13 +44,13 @@ const table = $('#datatable').DataTable({
             // width: '30px'
         },
         {
-            data: 'order_id', name: 'order_id',
+            data: 'order_id', name: 'order_id', visible: $('#role').val() === 'admin' ? true : false
             // width: '50px'
         },
-        // {
-            // data: 'created_at', name: 'created_at',
-            // width: '50px'
-        // },
+        {
+            data: 'created_at', name: 'created_at',
+            width: '50px'
+        },
         // {
         //     data: 'updated_at', name: 'updated_at',
         //     orderable: true
