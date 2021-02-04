@@ -33,6 +33,10 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="orderId" name="orderId"
                                             placeholder="Order Id">
+
+                                            {{-- Sign that only fetch confirm --}}
+                                            <input type="hidden" class="form-control" id="orderId" name="confirm"
+                                            value="1">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
