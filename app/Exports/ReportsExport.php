@@ -31,33 +31,33 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
     {
         $query = Lead::select('id', 'order_id', 'customer_id', 'note', 'caller_id', 'product_id', 'updated_at')->with('caller', 'product', 'customer');
 
-        $startDate = date('Y-m-d', strtotime($this->request->from));
-        $endDate = date('Y-m-d', strtotime($this->request->to));
-        if ($this->request->from && $this->request->to) {
+        $startDate = date('Y-m-d', strtotime($this->request['from']));
+        $endDate = date('Y-m-d', strtotime($this->request['to']));
+        if ($this->request['from'] && $this->request['to']) {
             $query->whereDate('updated_at', '>=', $startDate)
                     ->whereDate('updated_at', '<=', $endDate);
         }
 
-        $status = $this->request->status;
-        if ($this->request->status) {
+        $status = $this->request['status'];
+        if ($this->request['status']) {
             $query->where('status_caller', $status);
         }
 
-        if ($this->request->phone) {
+        if ($this->request['phone']) {
             $query->whereHas('customer', function ($customer) {
-                $customer->where('phone', 'like', '%' . $this->request->phone . '%');
+                $customer->where('phone', 'like', '%' . $this->request['phone'] . '%');
             });
         }
 
-        if ($this->request->orderId) {
-            $query->where('order_id', 'like', '%' . $this->request->orderId . '%');
+        if ($this->request['orderId']) {
+            $query->where('order_id', 'like', '%' . $this->request['orderId'] . '%');
         }
 
         if (GlobalProductIdService::get()) {
             $query->where('product_id', GlobalProductIdService::get());
         }
 
-        if ($this->request->confirm) {
+        if ($this->request['confirm']) {
             $query->where('status_caller', Lead::CONFIRMED);
         }
 
