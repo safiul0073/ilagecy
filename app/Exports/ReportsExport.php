@@ -38,16 +38,6 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
                     ->whereDate('updated_at', '<=', $endDate);
         }
 
-
-        if (request()->get('confirm')) {
-            $query->where('status_caller', Lead::CONFIRMED);
-            // It will take only the leads that had been processed by a caller
-            $query->whereHas('caller', function ($query) {
-                return $query->where('role', 'caller');
-            });
-        }
-
-
         $status = request()->get('status');
         if (request()->get('status')) {
             $query->where('status_caller', $status);
@@ -67,9 +57,17 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, Should
             $query->where('product_id', GlobalProductIdService::get());
         }
 
+        if (request()->get('confirm')) {
+            $query->where('status_caller', Lead::CONFIRMED);
+        }
 
-
+        // It will take only the leads that have caller ID ( that means processed Leads )
         $query->where('caller_id', '!=', 0);
+
+        // It will take only the leads that had been processed by a caller
+        $query->whereHas('caller', function ($query) {
+            return $query->where('role', 'caller');
+        });
 
 
 
