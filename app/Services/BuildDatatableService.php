@@ -71,9 +71,9 @@ class BuildDatatableService
                     }
                     
                     $number = substr($phone, -4);
-                    return "<div class='d-row'>
-                            <button  onclick='copyPhoneNumber(`$phone`)' class='btn btn-sm btn-secondary' >Copy</button> 
-                            <span class='badge badge-pill badge-secondary'>$number</span> 
+                    return "<div class='d-flex flex-column'>
+                            <button  onclick='copyPhoneNumber(`$phone`)' class='btn btn-sm btn-secondary mb-2' >Copy</button> 
+                            <span class='badge badge-pill badge-warning font-bold'>$number</span> 
                             </div>";
                 })
                 ->addColumn('customer_address', function (Lead $lead) {
