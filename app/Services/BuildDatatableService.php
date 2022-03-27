@@ -6,12 +6,19 @@ use App\Models\Lead;
 use App\Services\GlobalProductIdService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
+// 01716068965
+// 10321496
 class BuildDatatableService
 {
+    private static $product_id;
+    public function __construct(GlobalProductIdService $product_id)
+    {
+        self::$product_id = $product_id->get();
+    }
+
     public static function make()
     {
         $query = Lead::query();
@@ -25,7 +32,7 @@ class BuildDatatableService
 
         $status = request()->get('status');
         if (request()->get('status')) {
-            $query->where('status_caller', $status);
+            $query->where('status_admin', $status);
         }
 
         if (request()->get('phone')) {
@@ -35,18 +42,14 @@ class BuildDatatableService
         }
 
         if (request()->get('orderId')) {
-            $query->where('order_id', 'like', '%' . request()->get('orderId') . '%');
+            $query->where('order_id', request()->get('orderId'));
         }
 
-        if (GlobalProductIdService::get()) {
-            $query->where('product_id', GlobalProductIdService::get());
+        if (self::$product_id) {
+            $query->where('product_id', self::$product_id);
         }
-
-        if (request()->get('role') === 'caller') {
-            $query->where('status_caller', '!=', 'confirmed');
-        }
-
         return DataTables::of($query)
+                
                 ->editColumn('product_id', function (Lead $lead) {
                     $html  = $lead->product ? $lead->product->name : '';
 
@@ -62,7 +65,16 @@ class BuildDatatableService
                     return $lead->customer ? $lead->customer->name : '';
                 })
                 ->addColumn('customer_phone', function (Lead $lead) {
-                    return $lead->customer ? $lead->customer->phone : '';
+                    $phone = $lead->customer ? $lead->customer->phone : '';
+                    if (auth()->user()->role == 'admin') {
+                        return $phone;
+                    }
+                    
+                    $number = substr($phone, -4);
+                    return "<div class='d-row'>
+                            <button  onclick='copyPhoneNumber(`$phone`)' class='btn btn-sm btn-secondary' >Copy</button> 
+                            <span class='badge badge-pill badge-secondary'>$number</span> 
+                            </div>";
                 })
                 ->addColumn('customer_address', function (Lead $lead) {
                     return $lead->customer ? $lead->customer->address : '';
@@ -70,29 +82,20 @@ class BuildDatatableService
                 ->editColumn('created_at', function (Lead $lead) {
                     return Carbon::parse($lead->created_at);
                 })
-                ->editColumn('updated_at', function (Lead $lead) {
-                    return Carbon::parse($lead->updated_at);
-                })
                 ->editColumn('action', function (Lead $lead) {
                     $html = '
-                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-12px"></i></a>
-
-                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-12px"></i></a>
-
-                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-12px"></i></a>
-
-                    <a href="javascript;" id="change-status" class="btn btn-primary mb-1 d-block text-center" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-12px"></i></a>
-
-                    <a href="javascript;" class="btn btn-primary change-lead d-block text-center" data-toggle="modal" data-target="#modalLeadEdit"  data-leadId="'. $lead->id .'" data-name="'. ($lead->customer ? $lead->customer->name : '') .'" data-phone="'. ($lead->customer ? $lead->customer->phone : '') .'" data-email="'. ($lead->customer ? $lead->customer->email : '') .'" data-address="'. ($lead->customer ? $lead->customer->address : '') .'" data-callerstatus="'. $lead->status_caller .'"><i class="mdi mdi-pencil mdi-12px"></i></a>
+                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::CONFIRMED .' data-leadId='. $lead->id .'><i class="mdi mdi-check mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::CANCELLED .' data-leadId='. $lead->id .' ><i class="mdi mdi-close mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::HOLD .' data-leadId='. $lead->id .'><i class="mdi mdi-pause mdi-24px"></i></a>
+                    <a href="javascript;" id="change-status" class="d-block text-center" data-status='. Lead::TRASH .' data-leadId='. $lead->id .'><i class="mdi mdi-delete mdi-24px"></i></a>
+                    <a href="javascript;" class="change-lead d-block text-center" data-toggle="modal" data-target="#modalLeadEdit"  data-leadId="'. $lead->id .'" data-name="'. ($lead->customer ? $lead->customer->name : '') .'" data-phone="'. ($lead->customer ? $lead->customer->phone : '') .'" data-email="'. ($lead->customer ? $lead->customer->email : '') .'" data-address="'. ($lead->customer ? $lead->customer->address : '') .'" data-callerstatus="'. $lead->status_caller .'"><i class="mdi mdi-pencil mdi-24px"></i></a>
                     ';
                     // $html .= '<a href="javascript;" class="btn btn-danger" id="deleteLead"  data-leadid='. $lead->id . '>Delete</a>';
                     return $html;
                 })
                 ->editColumn('note', function (Lead $lead) {
-                    $note_text = $lead->note && strpos($lead->note, '||') ? explode('||', $lead->note)[0] : $lead->note;
-                    $note_info = $lead->note && strpos($lead->note, '||')  ? " || " .  explode('||', $lead->note)[1] : '';
-                    $html =   $note_text  . "<span class='lead_caller_info'>".$note_info  . '</span><br>
-                    <a href="javascript;" class="noteButton" data-toggle="modal" data-target="#exampleModal" data-leadid="' . $lead->id  . '" data-note="' . $note_text  . '"><i class="mdi mdi-plus mdi-24px"></i></a>
+                    $html = $lead->note . '<br>
+                    <a href="javascript;" class="noteButton" data-toggle="modal" data-target="#exampleModal" data-leadid="' . $lead->id  . '" data-note="' . $lead->note  . '"><i class="mdi mdi-plus mdi-24px"></i></a>
                     ';
                     return $html;
                 })
@@ -107,11 +110,14 @@ class BuildDatatableService
                 ->editColumn('postback', function (Lead $lead) {
                     $postback = $lead->send_to_api ?  'btn-success' : 'btn-primary';
                     $html = '
-                    <a href="javascript;" class="btn '.  $postback .' postback-confirm" data-leadid="'. $lead->id .'" data-productid="'. $lead->product_id .'" data-supplierid="'. $lead->supplier_id .'" data-orderid="'. $lead->order_id .'" data-callerstatus="'. $lead->status_caller.'" data-note="'. $lead->note .'">Confirm</a>
+                    <a href="javascript;" class="btn '.  $postback .' postback-confirm" data-leadid="'. $lead->id .'" data-productid="'. $lead->product_id .'" data-supplierid="'. $lead->supplier_id .'" data-orderid="'. $lead->order_id .'">Confirm</a>
                     ';
                     return $html;
                 })
-                ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
+                 ->rawColumns(['customer_phone','note','action','postback','status_admin','status_caller','product_id'])
+                 ->order(function ($query) {
+                     $query->orderBy('id', 'desc');
+                 })
                 ->make(true);
     }
 }

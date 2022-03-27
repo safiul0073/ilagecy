@@ -16,10 +16,12 @@ const table = $('#datatable').DataTable({
     scrollX: true,
     searching: false,
     fixedColumns: true,
-    order: [[0, "desc" ]],
+    order: [
+        [0, "desc"]
+    ],
     ajax: {
         url: '/api/leads/get',
-        data: function (d) {
+        data: function(d) {
 
             // $('#date-range').datepicker({ toggleActive: true});
             // $('#startDate').datepicker('setDate' , dateOne);
@@ -34,21 +36,25 @@ const table = $('#datatable').DataTable({
             d.orderId = $('#orderId').val();
         }
     },
-    columns: [
+    columns: [{
+            data: 'id',
+            name: 'id'
+                // width: '30px'
+        },
         {
-            data: 'id', name: 'id'
+            data: 'product_id',
+            name: 'product_id',
             // width: '30px'
         },
         {
-            data: 'product_id', name: 'product_id',
-            // width: '30px'
+            data: 'order_id',
+            name: 'order_id',
+            visible: $('#role').val() === 'admin' ? true : false
+                // width: '50px'
         },
         {
-            data: 'order_id', name: 'order_id', visible: $('#role').val() === 'admin' ? true : false
-            // width: '50px'
-        },
-        {
-            data: 'created_at', name: 'created_at',
+            data: 'created_at',
+            name: 'created_at',
             width: '50px'
         },
         // {
@@ -57,24 +63,30 @@ const table = $('#datatable').DataTable({
         //     // width: '50px'
         // },
         {
-            data: 'customer_id', name: 'customer_id',
+            data: 'customer_id',
+            name: 'customer_id',
             // width: '80px'
         },
         {
-            data: 'customer_phone', name: 'customer_phone',
+            data: 'customer_phone',
+            name: 'customer_phone',
             // width: '50px'
         },
         {
-            data: 'customer_address', name: 'customer_address',
+            data: 'customer_address',
+            name: 'customer_address',
             // width: '100px'
         },
         {
-            data: 'note', name: 'note',
+            data: 'note',
+            name: 'note',
             width: '100px'
         },
         {
-            data: 'action', name: 'action', orderable: 'false'
-            // width: '50px'
+            data: 'action',
+            name: 'action',
+            orderable: 'false'
+                // width: '50px'
         },
 
         // {
@@ -82,16 +94,20 @@ const table = $('#datatable').DataTable({
         //     // width: '50px'
         // },
         {
-            data: 'status_caller', name: 'status_caller',
+            data: 'status_caller',
+            name: 'status_caller',
             // width: '50px'
         },
 
         {
-            data: 'postback', name: 'postback', orderable: 'false' ,  visible: $('#role').val() === 'admin' ? true : false
-            // width: '50px'
+            data: 'postback',
+            name: 'postback',
+            orderable: 'false',
+            visible: $('#role').val() === 'admin' ? true : false
+                // width: '50px'
         },
     ],
-    "fnDrawCallback": function () {
+    "fnDrawCallback": function() {
         $('#gotoPageNumber').val('');
         handleChangeStatus();
         handleNoteButton();
@@ -106,13 +122,13 @@ const table = $('#datatable').DataTable({
 });
 
 function handleLongPagination() {
-    document.querySelector('#datatable_next').addEventListener('click',function(){
+    document.querySelector('#datatable_next').addEventListener('click', function() {
         table.page(table.page() + 14).draw(false)
     });
 }
 
-function handleGotoPage(){
-    document.querySelector('#gotoPage').addEventListener('click',function(){
+function handleGotoPage() {
+    document.querySelector('#gotoPage').addEventListener('click', function() {
         let gotoPageNumber = $('#gotoPageNumber').val();
         table.page(gotoPageNumber - 1).draw(false)
     });
@@ -120,7 +136,7 @@ function handleGotoPage(){
 
 function handleChangeStatus() {
     [...document.querySelectorAll('#change-status')].map(elem => {
-        elem.addEventListener('click', async function (e) {
+        elem.addEventListener('click', async function(e) {
             e.preventDefault();
             const height = window.pageYOffset;
             $('.loadingio-spinner-spinner-e1xmlecchsl').show();
@@ -134,7 +150,7 @@ function handleChangeStatus() {
                     role: role
                 }
             });
-            table.ajax.reload(function () {
+            table.ajax.reload(function() {
                 $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 
                 window.scrollTo(0, height);
@@ -144,7 +160,7 @@ function handleChangeStatus() {
 }
 
 function handleNote() {
-    document.querySelector('.saveNoteButton').addEventListener('click', async function () {
+    document.querySelector('.saveNoteButton').addEventListener('click', async function() {
         const height = window.pageYOffset;
         currentNote = document.querySelector('textarea.note').value
         leadId = document.querySelector('textarea.note').dataset.leadid
@@ -161,7 +177,7 @@ function handleNote() {
             }
         });
 
-        table.ajax.reload(function () {
+        table.ajax.reload(function() {
             $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 
             window.scrollTo(0, height);
@@ -172,8 +188,8 @@ function handleNote() {
 function handleNoteButton() {
     let currentNote;
     let leadId;
-    [...document.querySelectorAll('.noteButton')].map(function (elem) {
-        elem.addEventListener('click', function (e) {
+    [...document.querySelectorAll('.noteButton')].map(function(elem) {
+        elem.addEventListener('click', function(e) {
             currentNote = e.currentTarget.dataset.note;
             leadId = e.currentTarget.dataset.leadid;
             document.querySelector('textarea.note').value = currentNote
@@ -184,7 +200,7 @@ function handleNoteButton() {
 
 function handleDeleteLead() {
     [...document.querySelectorAll('#deleteLead')].map(elem => {
-        elem.addEventListener('click', async (e) => {
+        elem.addEventListener('click', async(e) => {
             e.preventDefault();
             const height = window.pageYOffset;
             if (confirm("Are you sure to delete lead?")) {
@@ -201,7 +217,7 @@ function handleDeleteLead() {
                     }
                 });
 
-                table.ajax.reload(function () {
+                table.ajax.reload(function() {
                     alert('Lead Deleted!');
                     $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 
@@ -216,8 +232,8 @@ function handleDeleteLead() {
 
 function handleEditButton() {
 
-    [...document.querySelectorAll('.change-lead')].map(function (elem) {
-        elem.addEventListener('click', function (e) {
+    [...document.querySelectorAll('.change-lead')].map(function(elem) {
+        elem.addEventListener('click', function(e) {
             const data = Object.entries(e.currentTarget.dataset);
             editLeadData = []
 
@@ -241,7 +257,7 @@ function handleEditButton() {
 }
 
 function handleEdit() {
-    document.querySelector('.saveEditButton').addEventListener('click', async function () {
+    document.querySelector('.saveEditButton').addEventListener('click', async function() {
         const height = window.pageYOffset;
         $("button[data-dismiss=\"modal\"]").click();
         $('.loadingio-spinner-spinner-e1xmlecchsl').show();
@@ -263,7 +279,7 @@ function handleEdit() {
         });
 
 
-        table.ajax.reload(function () {
+        table.ajax.reload(function() {
             $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 
             window.scrollTo(0, height);
@@ -272,8 +288,8 @@ function handleEdit() {
 }
 
 function handlePostbackButton() {
-    [...document.querySelectorAll('.postback-confirm')].map(function (elem) {
-        elem.addEventListener('click', async function (e) {
+    [...document.querySelectorAll('.postback-confirm')].map(function(elem) {
+        elem.addEventListener('click', async function(e) {
             e.preventDefault();
             const height = window.pageYOffset;
 
@@ -293,7 +309,7 @@ function handlePostbackButton() {
                 }
             });
 
-            table.ajax.reload(function () {
+            table.ajax.reload(function() {
                 $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
 
                 window.scrollTo(0, height);
@@ -304,7 +320,7 @@ function handlePostbackButton() {
 }
 
 function handleFilteringSearch() {
-    $('.filter-search-submit').on('click', function (e) {
+    $('.filter-search-submit').on('click', function(e) {
         e.preventDefault();
         from = $("#startDate").val();
         to = $("#endDate").val();
@@ -314,27 +330,27 @@ function handleFilteringSearch() {
         if ((from && to) || status || phone || orderId) {
             $('.loadingio-spinner-spinner-e1xmlecchsl').show();
 
-            table.on('draw', function () {
+            table.on('draw', function() {
                 $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
             });
             table.draw();
         }
     });
 
-    $('.statuses #changeStatus').on('click', function (e) {
+    $('.statuses #changeStatus').on('click', function(e) {
         e.preventDefault();
         newStatusForFilter = e.currentTarget.dataset.status;
 
         $('.loadingio-spinner-spinner-e1xmlecchsl').show();
 
-        table.on('draw', function () {
+        table.on('draw', function() {
             $('.loadingio-spinner-spinner-e1xmlecchsl').hide();
         });
         table.draw();
     });
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
     // var date = new Date();
     // var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     // var dateOne = new Date(date.getFullYear(), date.getMonth(), '01');
@@ -371,3 +387,15 @@ window.addEventListener('load', function () {
 //         handleChangeStatus();
 //     });
 // }
+
+function copyPhoneNumber(phoneNumber) {
+
+    if (!phoneNumber) phoneNumber = 'No phone number';
+    // copy clipboard in string this phone number
+    const textArea = document.createElement('textarea');
+    textArea.value = phoneNumber.toString();
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    textArea.remove();
+}
