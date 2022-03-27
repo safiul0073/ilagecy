@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Lead;
+use App\Models\User;
 use App\Services\GlobalProductIdService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class BuildDatatableService
                 })
                 ->addColumn('customer_phone', function (Lead $lead) {
                     $phone = $lead->customer ? $lead->customer->phone : '';
-                    if (auth()->user()->role == 'admin') {
+                    if (auth()->user()->role == User::ROLE_ADMIN) {
                         return $phone;
                     }
                     
