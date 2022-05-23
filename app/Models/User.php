@@ -43,7 +43,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -65,4 +64,13 @@ class User extends Authenticatable
     {
         return $this->onlyTrashed();
     }
+
+    public function getRoleAttribute($value)
+    {
+        if ($value == self::ROLE_CALLER) {
+            return 'agent';
+        }
+        return $value;
+    }
+
 }
